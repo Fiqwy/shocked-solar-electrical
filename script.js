@@ -813,48 +813,79 @@
       const map = L.map('leaflet-map', {
         center: [base.lat, base.lng],
         zoom: 10,
+        minZoom: 8,
         scrollWheelZoom: false,
         attributionControl: true,
         zoomControl: true,
       });
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+      // Single high-detail dark tile layer (CARTO dark_all) — shows street network
+      // and suburb labels at default opacity. Looks like a proper map, not a wireframe.
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; OpenStreetMap &copy; CARTO',
-        maxZoom: 18,
-        subdomains: 'abcd',
-      }).addTo(map);
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
-        maxZoom: 18, subdomains: 'abcd', opacity: 0.65,
+        maxZoom: 19, subdomains: 'abcd',
+        className: 'shocked-tiles',
       }).addTo(map);
 
-      // Base marker (Boronia Heights)
-      L.marker([base.lat, base.lng], {
-        icon: L.divIcon({ className: '', html: `<div class="shocked-marker base" aria-hidden="true"></div>`, iconSize: [24, 24], iconAnchor: [12, 12] }),
-        alt: 'Shocked Solar base — Boronia Heights',
-      }).addTo(map).bindPopup('Shocked Solar HQ · Boronia Heights');
+      // Base marker — lightning bolt pin at Boronia Heights HQ
+      const basePin = L.divIcon({
+        className: '',
+        html: `<div class="shocked-pin shocked-pin--base" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="#0A0A08" aria-hidden="true">
+            <path d="M14 2 5 14h6l-1 8 9-12h-6l1-8z"/>
+          </svg>
+          <span class="shocked-pin-tail"></span>
+        </div>`,
+        iconSize: [44, 56], iconAnchor: [22, 56],
+      });
+      L.marker([base.lat, base.lng], { icon: basePin, alt: 'Shocked Solar HQ — Boronia Heights', riseOnHover: true })
+        .addTo(map)
+        .bindTooltip('<strong>Shocked HQ</strong><br>Boronia Heights', { permanent: false, direction: 'top', offset: [0, -54], className: 'shocked-tt' })
+        .bindPopup('<strong>Shocked Solar & Electrical HQ</strong><br>Boronia Heights · 0490 482 632');
 
-      // Cluster centroids
+      // Cluster markers with PERMANENT name labels — proper area pins
       const clusters = [
-        { name: 'Brisbane south', lat: -27.55, lng: 153.06 },
-        { name: 'Logan',          lat: -27.66, lng: 153.10 },
-        { name: 'Ipswich east',   lat: -27.65, lng: 152.85 },
-        { name: 'Scenic Rim',     lat: -27.85, lng: 152.99 },
+        { name: 'Brisbane south', lat: -27.555, lng: 153.060 },
+        { name: 'Logan',          lat: -27.660, lng: 153.090 },
+        { name: 'Ipswich east',   lat: -27.640, lng: 152.840 },
+        { name: 'Scenic Rim',     lat: -27.875, lng: 152.990 },
       ];
       clusters.forEach(c => {
-        L.marker([c.lat, c.lng], {
-          icon: L.divIcon({ className: '', html: `<div class="shocked-marker" aria-hidden="true"></div>`, iconSize: [16, 16], iconAnchor: [8, 8] }),
-          alt: c.name,
-        }).addTo(map).bindPopup(c.name);
+        const pin = L.divIcon({
+          className: '',
+          html: `<div class="shocked-pin shocked-pin--cluster" aria-hidden="true">
+            <span class="shocked-pin-dot"></span>
+            <span class="shocked-pin-tail"></span>
+          </div>`,
+          iconSize: [22, 30], iconAnchor: [11, 30],
+        });
+        L.marker([c.lat, c.lng], { icon: pin, alt: c.name })
+          .addTo(map)
+          .bindTooltip(c.name, { permanent: true, direction: 'right', offset: [10, -14], className: 'shocked-tt shocked-tt--perm' });
       });
 
-      // Service polygon (rough)
-      L.polygon([
-        [-27.39, 152.78],
-        [-27.43, 153.20],
-        [-27.85, 153.30],
-        [-28.02, 152.92],
-        [-27.85, 152.62],
-        [-27.55, 152.65],
-      ], { color: '#00D9FF', weight: 1.5, fillColor: '#00D9FF', fillOpacity: 0.08 }).addTo(map);
+      // Service area polygon — traced through actual outer suburb perimeter
+      const serviceArea = [
+        [-27.395, 152.760],  // NW (Ipswich north)
+        [-27.430, 153.040],  // N (Brisbane north fringe)
+        [-27.460, 153.200],  // NE (Wynnum / coast)
+        [-27.720, 153.300],  // E (Beenleigh / Eagleby coast)
+        [-27.910, 153.260],  // SE (Coomera fringe)
+        [-28.020, 153.040],  // S (Tamborine / Wongawallan)
+        [-28.000, 152.870],  // SW (Scenic Rim south)
+        [-27.870, 152.680],  // W (Ipswich south)
+        [-27.640, 152.620],  // W (Ipswich west)
+        [-27.500, 152.680],  // NW (back toward Ipswich)
+      ];
+      L.polygon(serviceArea, {
+        color: '#F0A800',
+        weight: 2, opacity: 0.85,
+        fillColor: '#F0A800', fillOpacity: 0.06,
+        dashArray: '6 4',
+      }).addTo(map);
+
+      // Sit the map to fit the polygon + base + clusters
+      const allBounds = L.latLngBounds([[base.lat, base.lng], ...clusters.map(c => [c.lat, c.lng]), ...serviceArea]);
+      map.fitBounds(allBounds, { padding: [32, 32], maxZoom: 11 });
 
       // Tap to enable zoom on mobile
       const wrap = el.closest('.area-map-wrap');
