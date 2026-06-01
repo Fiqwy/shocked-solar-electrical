@@ -29,12 +29,12 @@ window.CONTENT = {
   },
 
   hero: {
-    eyebrow: 'Brisbane · Logan · Ipswich · 100kW jobs delivered',
+    eyebrow: 'Brisbane · Logan · Ipswich · Scenic Rim',
     // H1 rendered in two lines, second line italic + amber for emotional weight
     h1_line1: 'Same kit.',
     h1_italic: 'Same crew.',
     h1_line3: 'Same warranty.',
-    subhead: 'Premium solar, air-con and electrical from the team that wires 100kW commercial installs. The same SolaX, GoodWe, LONGi and Jinko gear on your roof. Backed by our 10 Year Installation Warranty.',
+    subhead: 'Premium solar, air-con and electrical from the team behind 100kW off-grid and 21kW commercial installs. The same SolaX, GoodWe, LONGi and Jinko gear on your roof. Backed by our 10 Year Installation Warranty.',
     primary_cta: 'Get a free quote',
     secondary_cta: 'Call 0490 482 632',
     scroll_hint: 'Scroll to see the standard',
@@ -47,7 +47,7 @@ window.CONTENT = {
   },
 
   suburb_result: {
-    success_template: (s) => `Yep — we cover ${s}. Lock in a free quote and we will lock in a time.`,
+    success_template: (s) => `Yep, we cover ${s}. Lock in a free quote and we will lock in a time.`,
     success_cta: 'Get my free quote',
     softno_template: (s) => `${s} is outside our standard run, but we travel for the bigger jobs. Give us a ring.`,
     softno_cta: 'Call 0490 482 632',
@@ -57,7 +57,7 @@ window.CONTENT = {
     pills: [
       '10 Year Installation Warranty',
       'Residential + Commercial',
-      '100kW jobs delivered',
+      '100kW off-grid installed',
       'SolaX · GoodWe · Jinko · LONGi · TCL · Sigenergy',
       'Schletter racking',
       'Up to 96kWh battery storage',
@@ -69,7 +69,7 @@ window.CONTENT = {
   three_pillars: {
     eyebrow: 'What we do',
     h2: 'Three trades. One crew. One call.',
-    lead: 'Solar, air-con and general electrical, all done by the same team, to the same spec we wire into commercial sites. No subbies, no commodity tier.',
+    lead: 'Solar, air-con and general electrical, all done by the same team, to the same spec we wire into commercial sites. Quality kit, clean installs, honest pricing.',
     cards: [
       {
         num: '01',
@@ -127,7 +127,7 @@ window.CONTENT = {
     out2_label: 'Over 25 years',
     out3_label: 'Payback in roughly',
     disclaimer: 'Estimate only. Final savings depend on your usage pattern, retailer plan and current STC + federal battery rebate tier at quote time.',
-    cta: 'Pencil the numbers. Book a real quote.',
+    cta: 'Book my real quote',
     // Constants for the calc (see brief component_techniques 06)
     constants: {
       PEAK_SUN_HRS: 5.0,
@@ -152,7 +152,7 @@ window.CONTENT = {
         chip: '100 kW · Off-grid',
         title: 'Remote NQ property',
         spec: 'Jinko panels · Schletter racking · Sigenergy inverters · 96 kWh battery',
-        alt: '100 kW solar array on a remote North Queensland property — Jinko panels, Schletter racking, Sigenergy inverters, 96 kWh battery storage',
+        alt: '100 kW solar array on a remote North Queensland property, with Jinko panels, Schletter racking, Sigenergy inverters and 96 kWh battery storage',
         feature: true,
       },
       {
@@ -197,16 +197,16 @@ window.CONTENT = {
     eyebrow: 'The 100kW standard',
     h2: 'Same kit on your roof as on a commercial site.',
     body_paragraphs: [
-      'The team started Shocked Solar & Electrical to do solar properly. Premium kit, clean installs, honest pricing. No commodity tier.',
+      'The team started Shocked Solar & Electrical to do solar properly. Quality kit, clean installs, honest pricing.',
       'We have tackled a 100kW remote North Queensland job on Jinko, Schletter and Sigenergy with 96kWh of battery storage. We have wired up a 21kW commercial site in Mount Gravatt on TCL 440W panels and a GoodWe 3-phase inverter. We have run a 13.3kW LONGi Hi-MO X10 system into a 50kWh SolaX battery for whole-home backup.',
       'We have rethought a system on site to a landscape config when wind ratings changed the game. We have relocated split systems to clear room for a monster fly-over patio, then roughed in and fit off the kitchenette behind it.',
       'Big jobs, small jobs, residential or commercial. Every install backed by our 10 Year Installation Warranty.',
     ],
     stats: [
-      { value: 100, suffix: 'kW', label: 'Largest install delivered' },
+      { value: 100, suffix: 'kW', label: 'Largest install on the books' },
       { value: 96, suffix: 'kWh', label: 'Biggest battery wired' },
       { value: 10, suffix: 'yr', label: 'Installation warranty' },
-      { value: 6, suffix: '+', label: 'Tier-1 brands installed' },
+      { value: 6, suffix: '+', label: 'Quality brands installed' },
     ],
     photo: 'assets/gallery/01-DY27kAgzr9B.webp',
   },
@@ -249,14 +249,14 @@ window.CONTENT = {
     h2: 'Straight answers.',
     side_cta: 'Still got a question? Ring the team on 0490 482 632.',
     items: [
-      { q: 'Do I still get the federal solar rebate?', a: 'Yes. The federal small-scale rebate (STCs) is currently available on new systems and we handle the paperwork for you. You see the discount up front in the quote, not as a refund later. We will walk you through the exact rebate your system is eligible for before you sign anything.' },
-      { q: 'What about the battery rebate?', a: 'Yes. The federal Cheaper Home Batteries Program is currently available on new battery installs alongside solar. The exact dollar value depends on the battery size and which tier the scheme is in at the time of install, so we calculate it fresh at quote time and show it on the line item.' },
+      { q: 'Do I still get the federal solar rebate?', a: 'Yes. The federal small-scale rebate (STCs) is currently available on new systems and is shown as an up-front discount on the quote, not a refund later. We walk you through the exact rebate your system is eligible for before you sign anything.' },
+      { q: 'What about the battery rebate?', a: 'Yes. The federal Cheaper Home Batteries Program is currently available on new battery installs alongside solar. The dollar value depends on the battery size and which tier the scheme is in at the time of install, so we calculate it fresh at quote time and show it as a line item on the quote.' },
       { q: 'Do I really need a battery, or just panels?', a: 'Depends on your bills, your usage and whether you want the lights on when the grid goes down. We have done full whole-home backup with 50kWh SolaX and we have done panels-only where it made more sense. Honest advice on the quote, not a sales pitch.' },
-      { q: 'What brands do you actually install?', a: 'SolaX, GoodWe, Jinko, LONGi, TCL and Sigenergy for solar and batteries. Schletter for racking. We pick the brand to suit the job, not the margin. Every panel and inverter we put up is a Tier-1 bankable brand with full Australian warranty support.' },
+      { q: 'What brands do you actually install?', a: 'SolaX, GoodWe, Jinko, LONGi, TCL and Sigenergy for solar and batteries. Schletter for racking. We pick the brand to suit the job, not the margin. Every panel and inverter we put up is a quality bankable brand with full Australian warranty support.' },
       { q: 'How do I know what size air-con I need?', a: 'Room size, ceiling height, insulation, window orientation and how many people use the space. The team measures on site and sizes the head properly. Undersized units run flat out and die early. Oversized ones short-cycle. We get it right the first time.' },
       { q: 'Can you upgrade my switchboard at the same time as solar?', a: 'Often yes. On a lot of older homes you have to, because the existing board cannot safely handle a new inverter or battery. If that is the case we will flag it up front in the quote and arrange it. One crew, one visit, one cost. No surprises mid-install.' },
       { q: 'How long does an install take?', a: 'A standard residential solar system is usually a one-day install once your STC paperwork, your retailer paperwork and our material order are sorted. Bigger jobs and battery installs can run two to three days. We give you a real timeline in the quote, not a guess.' },
-      { q: 'What does the 10 Year Installation Warranty cover?', a: 'Everything the team puts up. Mounting and racking integrity, cable, conduit and isolator workmanship, roof penetration waterproofing, and all electrical connections. Manufacturer warranties on panels, inverters and batteries are separate and we walk you through those at handover.' },
+      { q: 'What does the 10 Year Installation Warranty cover?', a: 'Everything the team installs. The full scope, exclusions and call-out terms are spelled out in the written quote you sign, alongside the separate manufacturer warranties on panels, inverters and batteries. We walk you through both at quote time, not after.' },
       { q: 'What areas do you actually cover?', a: 'Brisbane south, Logan, Ipswich east and Scenic Rim for everyday solar, air-con and electrical work. For larger commercial and off-grid jobs we travel further, including remote North Queensland. If you sit outside the standard run, ring us and we will talk it through.' },
       { q: 'How quickly can you get out for a quote?', a: 'Call 0490 482 632 or send the form and we will lock in a time that suits. We will always give you a real answer on timing rather than a vague promise.' },
     ],

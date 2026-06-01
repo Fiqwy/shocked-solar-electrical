@@ -1,0 +1,192 @@
+{
+  "acceptable_gaps": [
+    {
+      "gap": "No real customer reviews / aggregateRating in JSON-LD schema",
+      "rationale": "Shocked is a young business (started Feb 2026, 11 IG posts). Faking reviews is off the table per the no-placeholder-admissions rule. Leave the field out of schema until real reviews land \u2014 Google handles missing fields cleanly."
+    },
+    {
+      "gap": "Open Graph 1200x630 image asset",
+      "rationale": "Worth fixing if there's time, but a 640x640 with absolute URL still previews on most platforms. If shipping today, fix og:image absolute URL + add twitter:image + og:url + og:site_name in 5 minutes; defer the 1200x630 re-crop to the next pass."
+    },
+    {
+      "gap": "Postcode-to-suburb mapping for the hero suburb check",
+      "rationale": "Promise mismatch in placeholder copy is real, but the cheap fix (remove 'or postcode' from placeholder) closes the gap. Building the full postcode map is a nice-to-have once Tony signs off the service area."
+    },
+    {
+      "gap": "Soft-no email capture flow for out-of-area suburb check",
+      "rationale": "Product decision, not a bug. Nicholas's call whether to convert soft-no suburb leads into a future-pipeline list. Default behaviour (just say 'outside our run') is honest and acceptable for v1."
+    },
+    {
+      "gap": "4-hour SLA promise on the post-submit success screen",
+      "rationale": "Genuine CRO improvement, but requires the client to actually commit to a 4-hour reply SLA. Not a bug. Hold until Tony confirms response speed in writing."
+    },
+    {
+      "gap": "Vertical rhythm / section padding audit (huge dark voids between sections)",
+      "rationale": "Taste call from the visual audit, no code-level proof beyond screenshots. Worth doing if there's time post-launch, but not a ship blocker \u2014 and Nicholas hasn't seen the build himself to confirm whether the voids actually feel wrong."
+    },
+    {
+      "gap": "Hamburger drawer / mobile in-page nav",
+      "rationale": "Genuine UX improvement on a 16,000px+ mobile page, but a hours-scale build. Acceptable to defer for v1 since the footer carries the same destinations and mobile users will scroll. Add to v1.1 backlog."
+    },
+    {
+      "gap": "Lazy-loading Leaflet behind IntersectionObserver",
+      "rationale": "Performance polish. Page is already fast (FCP 68ms per perf audit, 120ms per Nicholas's notes). Defer to perf-tuning sweep."
+    }
+  ],
+  "exec_summary": "Strong editorial fundamentals undermined by one site-killer (the quote form is a silent lead-loss machine \u2014 fetch is commented out, every submission is thrown away) plus an unverified 10-year warranty repeated 11 times and an unverified CEC accreditation behind the rebate claims. Do not send the URL until the form is wired and Tony has signed off on the warranty + accreditation language.",
+  "grade": "D",
+  "nice_to_have": [
+    {
+      "where": "index.html OG/Twitter meta + new assets/og-image.jpg",
+      "what": "Generate a proper 1200x630 OG image (crop/letterbox the 100kW hero) for high-quality LinkedIn/Messenger/WhatsApp previews."
+    },
+    {
+      "where": "script.js initSuburbCheck + content.js postcode map",
+      "what": "Add postcode->suburb map (4109-4133, 4207-4208, 4280, 4285, 4300-4307) so 'Your suburb or postcode' actually accepts postcodes \u2014 fastest mobile micro-conversion."
+    },
+    {
+      "where": "styles.css hero clamp / .hero-line",
+      "what": "Lower hero font-size clamp floor (~2.375rem at <=400px) OR add text-wrap: balance so 'Same warranty.' doesn't orphan-wrap to two lines on 390/360/320."
+    },
+    {
+      "where": "script.js Leaflet init lines 813-902",
+      "what": "Initialise Leaflet with dragging/touchZoom/tap disabled; enable on first user interaction so the map doesn't trap vertical page scroll on mobile."
+    },
+    {
+      "where": "styles.css @media (max-width:700px) override for .seg, .range, .leaflet-control-zoom",
+      "what": "Bump touch targets to 44x44 minimum in the savings calc and on the map zoom controls."
+    },
+    {
+      "where": "script.js stat-num count-up + content.js stats markup",
+      "what": "Pre-render the target value as initial textContent (not '0') and use gsap.from(0); fixes AT users hearing '0 commercial sites delivered'."
+    },
+    {
+      "where": "script.js Recent Work .work-tile markup + lightbox open/close",
+      "what": "Render tiles as <button> (not <article>), add focus trap on lightbox open, restore focus to triggering tile on close \u2014 fixes WCAG 2.1.1 Level A keyboard violation."
+    },
+    {
+      "where": "script.js initSuburbCheck render() + ArrowUp/ArrowDown handlers",
+      "what": "Set/remove aria-activedescendant on the combobox input so screen-reader users hear the highlighted suburb option."
+    }
+  ],
+  "quick_wins": [
+    {
+      "where": "content.js line 50 ('Yep \u2014 we cover'), index.html line 9 (title), line 15 (og:title), line 228 (savings out3 placeholder), script.js line 935 (phone error 'Looks short \u2014 number please')",
+      "what": "Strip every user-visible em-dash. Replace with periods/commas/middle-dot. Add `body { hyphens:none; -webkit-hyphens:none; }`. Add a pre-commit grep guard: `grep -nP '\u2014' content.js index.html script.js styles.css` must return zero outside comments.",
+      "effort": "5 min"
+    },
+    {
+      "where": "content.js lines 32, 60, 197, 201, 206",
+      "what": "Soften every '100kW jobs delivered' / 'Largest install delivered' / 'We have tackled' to 'on the books' or 'on the boards' and singular 'job' until Tony confirms the NQ install is commissioned. Same fix in trust pill and stats label.",
+      "effort": "5 min"
+    },
+    {
+      "where": "content.js hero.subhead",
+      "what": "Rewrite to 'Premium solar, air-con and electrical from the team behind 100kW off-grid and 21kW commercial installs.' Current copy implies plural commercial 100kW installs; only the 21kW Mt Gravatt job is verified commercial.",
+      "effort": "5 min"
+    },
+    {
+      "where": "content.js three_pillars.lead line 72 + why_shocked.body_paragraphs[0] line 200",
+      "what": "Replace invented 'No subbies, no commodity tier' with phrases lifted from real captions: 'Quality kit, clean installs, honest pricing.' / 'Quality systems, clean installs, real savings.' (verbatim from post DX88FHQCcfk)",
+      "effort": "5 min"
+    },
+    {
+      "where": "content.js why_shocked.stats label line 209 + faq brand answer line 255",
+      "what": "Drop 'Tier-1' misapplication. Stats label: 'Quality brands installed'. FAQ: list brands with 'quality bankable brand with Australian warranty support' instead of 'Tier-1'.",
+      "effort": "5 min"
+    },
+    {
+      "where": "styles.css :root --danger (currently #FF4D5E hot pink-red)",
+      "what": "Recolour to a desaturated amber-tinted warning (#C46A2E or #E08A2A) so form error states stay inside the locked black/cream/amber palette.",
+      "effort": "2 min"
+    },
+    {
+      "where": "script.js initQuoteForm validate() blur handlers ~line 935",
+      "what": "Track per-field 'touched' Set. Only call setError on fields the user has actually focused-then-blurred. Stops the form rendering with red errors pre-fired across Phone+Email when Name is touched.",
+      "effort": "8 min"
+    },
+    {
+      "where": "script.js phone validation regex line 935",
+      "what": "Count digits not characters: `const digits = (phone.match(/\\d/g) || []).length; if (digits < 8) { ... }`. Add placeholder='04XX XXX XXX' on the phone input. Combine with em-dash fix above.",
+      "effort": "3 min"
+    },
+    {
+      "where": "script.js loop at ~line 248 (per-element fade-up) + line 266 (.work-grid stagger)",
+      "what": "Skip elements whose parent is .work-grid or .pillars-grid inside the per-element loop, so the parent stagger isn't double-fired. Stops the bottom row of Recent Work tiles being permanently stuck at opacity:0.",
+      "effort": "5 min"
+    },
+    {
+      "where": "script.js initSuburbCheck submit() ~line 580 (hero variant)",
+      "what": "After rendering the success card, fire `setTimeout(() => lenis.scrollTo('#quote', {offset:-72}), 900);` so qualified leads auto-glide to the form instead of having to click again.",
+      "effort": "5 min"
+    },
+    {
+      "where": "styles.css .mobile-call-bar lines 320-340",
+      "what": "Move bar to bottom thumb zone: `bottom:0`, swap border-bottom->border-top, swap translateY(-110%)->translateY(110%), swap padding-top safe-area->padding-bottom. Update body.mobile-bar-on offset to compensate.",
+      "effort": "5 min"
+    },
+    {
+      "where": "content.js line 224 (.cyan class on out2) and script.js dead code",
+      "what": "Drop the `cyan` class (no rule, no palette). Delete `_unused_initHeroCanvas` and the no-op `initWhyParallax` call + function. Trims ~5KB and removes lying markup.",
+      "effort": "5 min"
+    }
+  ],
+  "ship_blockers": [
+    {
+      "priority": 1,
+      "where": "/Users/nicholasmatthews/claude code projects/shocked-solar-electrical/script.js lines 950-985 (initQuoteForm submit handler)",
+      "what": "Wire a real Web3Forms endpoint. The submit is currently `await new Promise(r => setTimeout(r, 700))` with the real fetch commented out \u2014 every lead is silently discarded while the user sees 'the team will be in touch'. Set FORM_ENDPOINT='https://api.web3forms.com/submit', POST FormData with access_key, name, phone, email, suburb, interests, message, _subject, _replyto. CRITICAL: the catch block must NOT show the success card on failure \u2014 show a 'Call 0490 482 632 or email shockedsolarelectrical@gmail.com' fallback instead. Same pattern Nicholas already burned on for TipBro.",
+      "why": "Single highest-impact bug. A lying form silently loses every lead the site captures and exposes Shocked to Australian Consumer Law issues if a customer relied on the 'we will be in touch' message. This alone makes the site D-grade.",
+      "effort": "1-2 hours"
+    },
+    {
+      "priority": 2,
+      "where": "content.js lines 8, 37, 43, 44, 58, 65, 83, 203, 208, 259, 281 (every mention of '10 Year Installation Warranty')",
+      "what": "Ask Tony in writing: 'Do you back a 10 Year Installation Warranty on every job, in writing, covering mounting/racking/cable/conduit/waterproofing/electrical?' If yes \u2014 keep, pin the source. If no \u2014 replace all 11 instances with what he actually offers (e.g. 'Workmanship backed' or a shorter period). Centralise in ONE constant in content.js so future changes are one edit.",
+      "why": "Repeated 11 times across hero, trust strip, every pillar card, stats, FAQ Q8 (which specifies exactly what it covers), and footer legal line. Under Australian Consumer Law and QBCC framework this is a hard commercial promise \u2014 if Tony hasn't actually committed, a year-7 claim costs him real money or a QBCC complaint. The brief explicitly listed warranty as NOT on the verified list.",
+      "effort": "5 min once Tony confirms"
+    },
+    {
+      "priority": 3,
+      "where": "content.js three_pillars.cards[0].bullets ('Federal STC rebate handled'), faq.items[0], faq.items[1] (battery rebate handled)",
+      "what": "Confirm with Tony whether Shocked is CEC / Solar Accreditation Australia accredited. Both the federal STC scheme and the Cheaper Home Batteries Program LEGALLY require the installer to be accredited for the customer to receive the rebate. If yes \u2014 add a 'CEC accredited' line to the trust strip (strongest credibility lever in solar). If no \u2014 soften to 'We'll walk you through the rebate paperwork your accredited installer needs' or remove the rebate-handled bullets.",
+      "why": "Customers can check the CER installer list in 30 seconds. If Shocked isn't accredited, the savings calc and 'STC rebate handled' bullet are misleading and the highest legal/regulatory risk on the page.",
+      "effort": "5 min once Tony confirms"
+    },
+    {
+      "priority": 4,
+      "where": "/Users/nicholasmatthews/claude code projects/shocked-solar-electrical/ (project root) \u2014 robots.txt + sitemap.xml",
+      "what": "Add two files. robots.txt: `User-agent: *` then `Sitemap: https://fiqwy.github.io/shocked-solar-electrical/sitemap.xml`. sitemap.xml: minimal XML listing canonical URL with lastmod. Pattern already used on switch-on-electrical and dr-paint per CLAUDE.md.",
+      "why": "Both currently return 404. First-impression SEO hygiene + soft-signal to manual auditors that the site is unfinished. Brisbane solar competitors all ship them.",
+      "effort": "5 min"
+    },
+    {
+      "priority": 5,
+      "where": "index.html line 101 (.nav-suburb) + script.js scroll handler (~line 285) that toggles .show-suburb",
+      "what": "Toggle the `inert` attribute on the .nav-suburb container in lock-step with the .show-suburb class. Currently aria-hidden=true is static while the form becomes focusable on scroll, which is a hard ARIA contract violation (focusable controls inside aria-hidden parent).",
+      "why": "WCAG 4.1.2 violation, AU DDA exposure. Also creates phantom Tab stops for keyboard users with zero announcement.",
+      "effort": "10 min"
+    },
+    {
+      "priority": 6,
+      "where": "index.html line 17-22 (Open Graph) \u2014 make og:image absolute URL + add missing meta",
+      "what": "Change og:image from relative path to absolute: `https://fiqwy.github.io/shocked-solar-electrical/assets/gallery/10-DQlR5EGkyhf.jpg`. Add `twitter:image` (same absolute URL), `og:url`, `og:site_name`. (A proper 1200x630 OG image is a nice-to-have; absolute URL alone is the must-fix.)",
+      "why": "LinkedIn, Slack, WhatsApp and Facebook scrapers commonly fall back to no image when og:image is relative. The URL will be shared in DMs and Messenger by Tony/Nicholas \u2014 that preview is the moment of truth.",
+      "effort": "5 min"
+    },
+    {
+      "priority": 7,
+      "where": "index.html line 230-233 (savings card CTA) + content.js line 130 cta string",
+      "what": "Shorten 'Pencil the numbers. Book a real quote.' to 'Get my real quote' or 'Book the real quote'. Move 'Pencil the numbers' to the paragraph above the button. Current text clips on the right at 390 viewport \u2014 the arrow icon disappears with the tail and the primary conversion button looks broken.",
+      "why": "Truncated CTA on the most interactive conversion section reads as broken software exactly when click intent peaks.",
+      "effort": "5 min"
+    },
+    {
+      "priority": 8,
+      "where": "script.js initQuoteForm validate() blur handlers + script.js loop at line 248 + line 266 (double GSAP from on .work-grid children)",
+      "what": "Two fixes bundled: (a) Track a per-field 'touched' Set in validate() so red errors only appear on fields the user has actually blurred (currently any blur fires errors on Name+Phone+Email together). (b) In the loop at line 248 skip elements whose parent is .work-grid or .pillars-grid \u2014 the parent stagger at line 266 handles them and the double from() leaves the bottom row of Recent Work tiles stuck at opacity:0.",
+      "why": "Form rendering with pre-fired red errors reads as broken software. Half the Recent Work case studies being invisible guts the trust core of the page (the 100kW credibility argument rests on those install proofs).",
+      "effort": "20 min"
+    }
+  ]
+}

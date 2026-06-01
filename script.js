@@ -27,13 +27,11 @@
     initMagnetic();
     initHeroKenBurns();
     initSuburbCheck($('#hero-suburb-input'), byRole('hero-suburb-listbox'), byRole('hero-suburb-result'), 'hero');
-    initSuburbCheck($('#nav-suburb-input'), null, null, 'nav');
     initTrustStripMarquee();
     initPillarsSpotlight();
     initSavingsCalc();
     initWorkGrid();
     initCountUps();
-    initWhyParallax();
     initLeafletMap();
     initQuoteForm();
     initFaqEnhance();
@@ -247,6 +245,9 @@
     if (!window.ScrollTrigger) return;
     $$('[data-reveal="fade-up"]').forEach(el => {
       if (el.closest('.hero')) return;
+      // Skip children that are inside a grid handled by the parent stagger below,
+      // otherwise a double gsap.from() leaves them stuck at opacity:0 forever.
+      if (el.parentElement && (el.parentElement.classList.contains('work-grid') || el.parentElement.classList.contains('pillars-grid'))) return;
       gsap.from(el, {
         y: 32, opacity: 0, duration: 0.9, ease: 'expo.out',
         scrollTrigger: { trigger: el, start: 'top 85%', once: true },
@@ -279,12 +280,13 @@
     const mobileBar = $('.mobile-call-bar');
     if (!nav || !sentinel) return;
 
-    // Track scroll position vs the hero sentinel (which sits at hero bottom).
-    // We want "past hero" === sentinel ABOVE viewport (top < 0), not just isIntersecting=false.
+    // Track scroll position vs the hero sentinel (sits at hero bottom).
+    // Past hero === sentinel is ABOVE viewport (top < 0). Reveals the .scrolled
+    // nav skin + the mobile call bar. The condensed suburb bar was killed
+    // because it was permanently overlapping downstream section headings.
     function updateNavState() {
       const past = sentinel.getBoundingClientRect().top < 80;
       nav.classList.toggle('scrolled', past);
-      nav.classList.toggle('show-suburb', past);
       if (mobileBar) {
         mobileBar.classList.toggle('visible', past);
         document.body.classList.toggle('mobile-bar-on', past);
@@ -368,8 +370,9 @@
     }
   }
 
-  /* ---------- (removed) HERO CANVAS voltage→sun ---------- */
-  function _unused_initHeroCanvas() {
+  /* ---------- (removed) Legacy hero canvas voltage→sun morph. Kept as dead
+       reference only in earlier commits; deleted below. ----------
+  function _DELETED_initHeroCanvas() {
     const canvas = byRole('hero-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d', { alpha: true, willReadFrequently: false });
@@ -527,6 +530,7 @@
     }, { threshold: 0 });
     io.observe(canvas.parentElement);
   }
+  */
 
   /* ---------- Suburb-check combobox ---------- */
   function initSuburbCheck(input, listbox, resultEl, key) {
@@ -606,6 +610,15 @@
         const quote = document.getElementById('quote');
         if (quote) (lenis ? lenis.scrollTo(quote, { offset: -72 }) : quote.scrollIntoView({ behavior: 'smooth' }));
       });
+      // Auto-glide qualified leads down to the form after a beat so they don't
+      // have to find the next step themselves.
+      if (inList) {
+        setTimeout(() => {
+          const quote = document.getElementById('quote');
+          if (quote && lenis) lenis.scrollTo(quote, { offset: -72 });
+          else if (quote) quote.scrollIntoView({ behavior: 'smooth' });
+        }, 1100);
+      }
     }
 
     input.addEventListener('input', () => {
@@ -787,8 +800,6 @@
     els.forEach(el => io.observe(el));
   }
 
-  /* ---------- Why parallax (removed — section deleted) ---------- */
-  function initWhyParallax() { /* no-op */ }
 
   /* ---------- Leaflet map ---------- */
   function initLeafletMap() {
@@ -920,24 +931,34 @@
       if (on) selectedInterests.delete(v); else selectedInterests.add(v);
     });
 
+    // Only show errors on fields the user has touched (focused-then-blurred).
+    // Stops the form rendering with red errors pre-fired across all three fields.
+    const touched = new Set();
     function setError(name, msg) {
       const field = form.querySelector(`#q-${name}`)?.closest('.field');
       const errEl = byRole(`q-${name}-error`);
       if (field) field.classList.toggle('has-error', !!msg);
       if (errEl) errEl.textContent = msg || '';
     }
-    function validate() {
+    function checkField(name) {
+      const v = form[name].value.trim();
+      if (name === 'name')  return v.length < 2 ? 'Your name please.' : '';
+      if (name === 'phone') return ((v.match(/\d/g) || []).length < 8) ? 'Looks short. Number please.' : '';
+      if (name === 'email') return !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v) ? 'Real email please.' : '';
+      return '';
+    }
+    function validate(forceAll) {
       let ok = true;
-      const name = form.name.value.trim();
-      const phone = form.phone.value.trim();
-      const email = form.email.value.trim();
-      if (name.length < 2) { setError('name', 'Your name please'); ok = false; } else setError('name', '');
-      if (!/^[\d\s\+\(\)]{8,}$/.test(phone)) { setError('phone', 'Looks short — number please'); ok = false; } else setError('phone', '');
-      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { setError('email', 'Real email please'); ok = false; } else setError('email', '');
+      ['name', 'phone', 'email'].forEach(n => {
+        const msg = checkField(n);
+        if (msg) ok = false;
+        if (forceAll || touched.has(n)) setError(n, msg);
+      });
       return ok;
     }
     ['name', 'phone', 'email'].forEach(n => {
-      form[n].addEventListener('blur', validate);
+      form[n].addEventListener('blur', () => { touched.add(n); setError(n, checkField(n)); });
+      form[n].addEventListener('input', () => { if (touched.has(n)) setError(n, checkField(n)); });
     });
 
     // Prefill suburb from sessionStorage
@@ -951,7 +972,7 @@
       e.preventDefault();
       // Honeypot
       if (form.website.value) return;
-      if (!validate()) return;
+      if (!validate(true)) return;
       submit.classList.add('is-loading');
       submit.disabled = true;
 
@@ -964,24 +985,56 @@
         message: form.message.value.trim(),
       };
 
+      // === FORM DELIVERY ===
+      // Web3Forms primary (https://web3forms.com). If WEB3FORMS_KEY is the
+      // placeholder OR the fetch fails, fall back to a mailto: so the lead
+      // STILL reaches Brendan, with phone number prominent in the success
+      // copy. No silent lead loss.
+      const WEB3FORMS_KEY = 'REPLACE_WITH_REAL_WEB3FORMS_ACCESS_KEY';
+      const FALLBACK_EMAIL = 'shockedsolarelectrical@gmail.com';
+
+      const interestsList = data.interests.length ? data.interests.join(', ') : 'Not specified';
+      const mailtoBody =
+        `Name: ${data.name}\n` +
+        `Phone: ${data.phone}\n` +
+        `Email: ${data.email}\n` +
+        `Suburb: ${data.suburb || 'Not given'}\n` +
+        `After: ${interestsList}\n\n` +
+        `Notes:\n${data.message || '(none)'}\n\n` +
+        `— Sent from shockedsolar website`;
+
+      let delivered = false;
       try {
-        // Placeholder send. Hook up Web3Forms / Formspree by replacing FORM_ENDPOINT.
-        // For demo: simulate 700ms then show success.
-        await new Promise(r => setTimeout(r, 700));
-        // const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: JSON.stringify(data), headers: { 'Content-Type': 'application/json' } });
-        // if (!res.ok) throw new Error('bad response');
-        form.hidden = true;
-        success.hidden = false;
-        if (window.gsap && !reduced) window.gsap.from(success, { y: 16, opacity: 0, duration: 0.5, ease: 'expo.out' });
-      } catch (err) {
-        const successText = byRole('quote-success-body');
-        if (successText) successText.textContent = C.quote.error_body;
-        form.hidden = true;
-        success.hidden = false;
-      } finally {
-        submit.classList.remove('is-loading');
-        submit.disabled = false;
+        if (WEB3FORMS_KEY && !WEB3FORMS_KEY.startsWith('REPLACE_')) {
+          const fd = new FormData();
+          fd.append('access_key', WEB3FORMS_KEY);
+          fd.append('subject', `New quote request — ${data.name} (${data.suburb || 'no suburb'})`);
+          fd.append('from_name', 'Shocked Solar Website');
+          fd.append('replyto', data.email);
+          Object.entries(data).forEach(([k, v]) => fd.append(k, Array.isArray(v) ? v.join(', ') : v));
+          const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
+          delivered = res.ok;
+        }
+      } catch (_) { delivered = false; }
+
+      // Build the success/fallback card. ALWAYS show a working contact path.
+      const successBody = byRole('quote-success-body');
+      if (delivered) {
+        if (successBody) successBody.textContent = C.quote.success_body;
+      } else {
+        // Form not yet wired (or send failed). Surface phone + a mailto deeplink.
+        const mailto = `mailto:${FALLBACK_EMAIL}?subject=${encodeURIComponent('Quote request — ' + data.name)}&body=${encodeURIComponent(mailtoBody)}`;
+        if (successBody) {
+          successBody.innerHTML =
+            `We could not send that automatically. Tap below to email it through, or ring the team on <a href="tel:0490482632">0490 482 632</a>.<br><br>` +
+            `<a class="btn btn-primary" href="${mailto}">Open in email</a>`;
+        }
       }
+      form.hidden = true;
+      success.hidden = false;
+      if (window.gsap && !reduced) window.gsap.from(success, { y: 16, opacity: 0, duration: 0.5, ease: 'expo.out' });
+      submit.classList.remove('is-loading');
+      submit.disabled = false;
     });
   }
 
