@@ -949,24 +949,6 @@ body {
   margin: 0;
 }
 
-.why-photo-wrap {
-  position: relative;
-  margin-top: 100px;
-  height: clamp(280px, 40vw, 520px);
-  overflow: hidden;
-  border-top: 1px solid var(--lines);
-  border-bottom: 1px solid var(--lines);
-  background: var(--bg);
-}
-.why-photo {
-  position: absolute; inset: -10%;
-  width: 120%; height: 120%;
-  object-fit: cover;
-  opacity: 0.75;
-  filter: contrast(1.1);
-  will-change: transform;
-}
-
 /* ============================================================
    SERVICE AREA MAP
    ============================================================ */

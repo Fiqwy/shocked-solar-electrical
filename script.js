@@ -787,16 +787,8 @@
     els.forEach(el => io.observe(el));
   }
 
-  /* ---------- Why parallax ---------- */
-  function initWhyParallax() {
-    if (reduced || !window.gsap || !window.ScrollTrigger) return;
-    const photo = $('.why-photo');
-    if (!photo) return;
-    window.gsap.to(photo, {
-      y: 50, ease: 'none',
-      scrollTrigger: { trigger: '.why-photo-wrap', start: 'top bottom', end: 'bottom top', scrub: 0.8 },
-    });
-  }
+  /* ---------- Why parallax (removed — section deleted) ---------- */
+  function initWhyParallax() { /* no-op */ }
 
   /* ---------- Leaflet map ---------- */
   function initLeafletMap() {
