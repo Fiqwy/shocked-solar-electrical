@@ -1,0 +1,186 @@
+{
+  "scraped_at": "2026-06-01",
+  "scraped_by": "Claude Code + Playwright MCP (headed)",
+  "source": "https://www.instagram.com/shockedsolarandelectrical/",
+  "profile": {
+    "handle": "shockedsolarandelectrical",
+    "display_name": "Shocked Solar & Electrical",
+    "category": "Electrician",
+    "bio_verbatim": "🔋Solar Energy\n❄️Air Conditioning\n💡General Electrical\n📍Brisbane and surrounding areas\n📞 0490 482 632\n📧 SHOCKEDSOLARELECTRICAL@GMAIL.COM",
+    "stats": {
+      "posts": 11,
+      "followers": 83,
+      "following": 2
+    },
+    "external_links": [],
+    "profile_photo_url": "https://instagram.fbne5-1.fna.fbcdn.net/v/t51.82787-19/530131861_17848435581537192_5837443063394749992_n.jpg?stp=dst-jpg_s320x320_tt6",
+    "profile_photo_local": "assets/logo/profile.jpg"
+  },
+  "verified_facts": {
+    "legal_name": "SHOCKED SOLAR & ELECTRICAL PTY LTD",
+    "abn": "27 684 898 762",
+    "acn": "684 898 762",
+    "gst_registered": "2025-04-01",
+    "active_since": "2025-02-27",
+    "main_location_postcode": "QLD 4124 (Boronia Heights area)",
+    "phone": "0490 482 632",
+    "email": "SHOCKEDSOLARELECTRICAL@GMAIL.COM",
+    "instagram": "https://www.instagram.com/shockedsolarandelectrical/",
+    "website": null,
+    "google_business": null,
+    "facebook": null
+  },
+  "voice_read": {
+    "team_structure": "TEAM (not solo) - captions use 'the team', 'the boys'",
+    "tone": "confident, practical, technical, Aussie casual",
+    "signature_phrases": ["Why not go solar?", "the boys", "Powered Right", "#SSE", "#ShockedSolarElectrical"],
+    "emoji_palette": ["⚡", "☀️", "🔋", "❄️", "💡", "📍", "📞", "📧"],
+    "hashtag_style": ["#SolarQueensland", "#ShockedSolarElectrical", "#SSE", "#SolarPower", "#GoSolar"]
+  },
+  "service_capabilities": {
+    "solar": {
+      "residential": true,
+      "commercial": true,
+      "largest_install_kw": 100,
+      "battery_storage_largest_kwh": 96,
+      "brands_installed": ["SolaX", "GoodWe", "LONGi Hi-MO X10", "Jinko", "TCL", "Schletter (racking)", "Sigenergy"],
+      "warranty": "10 Year Installation Warranty"
+    },
+    "air_conditioning": {
+      "split_systems": true,
+      "relocation_jobs": true
+    },
+    "electrical": {
+      "general": true,
+      "kitchen_appliances": true,
+      "patio_fitouts": true,
+      "switchboards_inferred": true
+    },
+    "service_areas_mentioned": ["Brisbane", "Mount Gravatt", "North Queensland (remote properties)"]
+  },
+  "highlights": [
+    {
+      "label": "Solar",
+      "url": "https://www.instagram.com/stories/highlights/18053372444418684/",
+      "cover_url": "https://instagram.fbne6-1.fna.fbcdn.net/v/t51.71878-15/620528721_1646076166773755_5681225166489621803_n.jpg",
+      "cover_local": "assets/highlights/solar-cover.jpg"
+    },
+    {
+      "label": "Electrical",
+      "url": "https://www.instagram.com/stories/highlights/18092940925783961/",
+      "cover_url": "https://instagram.fbne5-1.fna.fbcdn.net/v/t51.71878-15/621211919_2047936732606711_99853826337289311_n.jpg",
+      "cover_local": "assets/highlights/electrical-cover.jpg"
+    }
+  ],
+  "posts": [
+    {
+      "id": "DY27kAgzr9B",
+      "type": "post",
+      "url": "https://www.instagram.com/shockedsolarandelectrical/p/DY27kAgzr9B/",
+      "thumbnail_url": "https://instagram.fbne5-1.fna.fbcdn.net/v/t51.82787-15/706003029_17889547737537192_4504467869458162752_n.jpg?stp=dst-jpg_e35_p640x640_sh2.08_tt6",
+      "local": "assets/gallery/01-DY27kAgzr9B.jpg",
+      "category": "promo-solar",
+      "caption": "⚡️ Thinking about going solar? Now's the time! ☀️ At Shocked Solar & Electrical, we supply and install premium solar systems designed to save you money and power your home smarter. From quality panels and inverters to battery storage and full home backup solutions — we've got you covered. ✅ Premium products only ✅ Quality workmanship ✅ 10 Year Installation Warranty ✅ Residential & Commercial Solar ✅ Battery Storage Solutions ✅ Honest advice & competitive pricing. Lower your power bills, increase energy independence and future-proof your home with a system built to last. 📞 Call us today for a FREE quote: 0490 482 632 📧 SHOCKEDSOLARELECTRICAL@GMAIL.COM. ⚡️ Local. Reliable. Professional. #SolarQueensland #SolarPower #SolarEnergy #SolarInstallation #batterystorage"
+    },
+    {
+      "id": "DYwL2LtqA1l",
+      "type": "reel",
+      "url": "https://www.instagram.com/shockedsolarandelectrical/reel/DYwL2LtqA1l/",
+      "thumbnail_url": "https://instagram.fbne5-1.fna.fbcdn.net/v/t51.82787-15/707945652_17889089256537192_8917000557434458324_n.jpg?stp=dst-jpg_e35_p640x640_sh2.08_tt6",
+      "local": "assets/gallery/02-DYwL2LtqA1l-reel.jpg",
+      "category": "case-study-commercial",
+      "highlight": "21kW Mount Gravatt commercial install",
+      "tech": ["GoodWe 20kW 3-Phase Inverter", "TCL 440W High Efficiency Panels"],
+      "caption": "Another quality commercial install completed by Shocked Solar & Electrical ⚡ We recently finished this 21kW solar installation in Mount Gravatt ☀️. 🔹 GoodWe 20kW 3-Phase Inverter. 🔹 TCL 440W High Efficiency Panels. Helping local businesses cut power bills and take control of rising energy costs 💰⚡ Thinking about solar for your home or business? Get in touch with the team at Shocked Solar & Electrical! 📞 0490 482 632 📩 SHOCKEDSOLARELECTRICAL@GMAIL.COM #ShockedSolarElectrical #CommercialSolar #MountGravatt #SolarQLD"
+    },
+    {
+      "id": "DYwKM2hGsQd",
+      "type": "post",
+      "url": "https://www.instagram.com/shockedsolarandelectrical/p/DYwKM2hGsQd/",
+      "thumbnail_url": "https://instagram.fbne5-1.fna.fbcdn.net/v/t51.82787-15/706752821_17889086622537192_6632909955589642891_n.jpg?stp=dst-jpg_e35_p640x640_sh2.08_tt6",
+      "local": "assets/gallery/03-DYwKM2hGsQd.jpg",
+      "category": "case-study-residential",
+      "highlight": "Full battery + backup install",
+      "tech": ["50kWh SolaX battery storage", "10kW SolaX inverter", "13.3kW LONGi Hi-MO X10 panels", "Whole home backup"],
+      "caption": "Another premium install completed by Shocked Solar & Electrical 🔋☀️ This customer is now powered with: 🔹 50kWh SolaX battery storage 🔹 10kW SolaX inverter 🔹 13.3kW of LONGi Hi-MO X10 solar panels 🔹 Whole home backup – keeping the lights on when the grid goes down! ⚡️🏡 Less reliance on the grid, more energy independence, and serious savings for years to come 🙌"
+    },
+    {
+      "id": "DYtoSH4Gue-",
+      "type": "post",
+      "url": "https://www.instagram.com/shockedsolarandelectrical/p/DYtoSH4Gue-/",
+      "thumbnail_url": "https://instagram.fbne5-1.fna.fbcdn.net/v/t51.82787-15/704286953_17888917953537192_797841186228950721_n.jpg?stp=dst-jpg_e15_p640x640_tt6",
+      "local": "assets/gallery/04-DYtoSH4Gue.jpg",
+      "category": "case-study-shed",
+      "highlight": "13.2kW shed solar",
+      "caption": "This shed is now running on an impressive 13.2kW solar system! More power, lower bills, and making the most of the Queensland sun 🌞🔋. Clean install, quality workmanship, and built to perform. Whether it's your shed, workshop, or home, we've got you covered. Why not go solar?"
+    },
+    {
+      "id": "DX88FHQCcfk",
+      "type": "post",
+      "url": "https://www.instagram.com/shockedsolarandelectrical/p/DX88FHQCcfk/",
+      "thumbnail_url": "https://instagram.fbne5-1.fna.fbcdn.net/v/t51.82787-15/683767464_17885819388537192_7489118225869678457_n.jpg?stp=dst-jpg_e35_s640x640_sh2.08_tt6",
+      "local": "assets/gallery/05-DX88FHQCcfk.jpg",
+      "category": "promo-solar",
+      "caption": "Why not go solar? ☀️ Installed by the team at Shocked Solar & Electrical ⚡ Quality systems, clean installs, real savings. DM us for a quote. #solar #pv #power #cleanenergy"
+    },
+    {
+      "id": "DX6gXyFCd6h",
+      "type": "post",
+      "url": "https://www.instagram.com/shockedsolarandelectrical/p/DX6gXyFCd6h/",
+      "thumbnail_url": "https://instagram.fbne5-1.fna.fbcdn.net/v/t51.82787-15/684727196_17885665140537192_4545377540528861013_n.jpg?stp=dst-jpg_e35_p640x640_sh2.08_tt6",
+      "local": "assets/gallery/06-DX6gXyFCd6h.jpg",
+      "category": "case-study-electrical",
+      "highlight": "Kitchen appliance install",
+      "caption": "Thinking about upgrading your kitchen appliances? ⚡️ From ovens and cooktops to lighting and power — we make sure everything's installed safely, cleanly, and built to handle the load. 📞 Give us a call: 0490 482 632. Powering your kitchen the right way. #Electrician #KitchenUpgrade #ApplianceInstall #SSE #PoweredRight"
+    },
+    {
+      "id": "DX6bbvVCXqV",
+      "type": "post",
+      "url": "https://www.instagram.com/shockedsolarandelectrical/p/DX6bbvVCXqV/",
+      "thumbnail_url": "https://instagram.fbne5-1.fna.fbcdn.net/v/t51.82787-15/684418228_17885659353537192_5544979322710521065_n.jpg?stp=dst-jpg_e35_p640x640_sh2.08_tt6",
+      "local": "assets/gallery/07-DX6bbvVCXqV.jpg",
+      "category": "case-study-engineering",
+      "highlight": "Wind rating compliance — landscape config",
+      "caption": "Wind rating requirements changed the game on this install 🌬️☀️ With screw lines too close together for a standard layout, the team had to rethink the system design. We switched it to a landscape configuration to meet compliance while keeping performance and strength where it needs to be. Adapting on site is all part of delivering a reliable solar system. #renuableenergy #solar #greenenergy #shocked #pv"
+    },
+    {
+      "id": "DSB_REmk-G3",
+      "type": "post",
+      "url": "https://www.instagram.com/shockedsolarandelectrical/p/DSB_REmk-G3/",
+      "thumbnail_url": "https://instagram.fbne5-1.fna.fbcdn.net/v/t51.82787-15/587806873_17863993683537192_5374328256112923216_n.jpg?stp=dst-jpg_e35_p640x640_sh2.08_tt6",
+      "local": "assets/gallery/08-DSB_REmk-G3.jpg",
+      "category": "brand-statement",
+      "caption": "Shocked Solar & Electrical offers Expert Installs, Quality Workmanship, and Clean Energy Solutions that power your future the right way ⚡️☀️ #GoGreenWithShocked"
+    },
+    {
+      "id": "DRMJ2XoE2vw",
+      "type": "post",
+      "url": "https://www.instagram.com/shockedsolarandelectrical/p/DRMJ2XoE2vw/",
+      "thumbnail_url": "https://instagram.fbne5-1.fna.fbcdn.net/v/t51.82787-15/584003273_17861595105537192_7425847783564999732_n.jpg?stp=dst-jpg_e35_s640x640_sh2.08_tt6",
+      "local": "assets/gallery/09-DRMJ2XoE2vw.jpg",
+      "category": "brand-statement",
+      "caption": "At Shocked Solar & Electrical, we make the process simple, stress-free, and tailored to your home or business. 🌱⚡️ ✔️ Quality products ✔️ Professional installations ✔️ Honest advice ✔️ Local experts you can trust. Make the smart switch today — your future self (and your wallet) will thank you. 🔋💡"
+    },
+    {
+      "id": "DQlR5EGkyhf",
+      "type": "post",
+      "url": "https://www.instagram.com/shockedsolarandelectrical/p/DQlR5EGkyhf/",
+      "thumbnail_url": "https://instagram.fbne5-1.fna.fbcdn.net/v/t51.82787-15/573120477_17859914532537192_1046936496257107431_n.jpg?stp=dst-jpg_e35_s640x640_sh2.08_tt6",
+      "local": "assets/gallery/10-DQlR5EGkyhf.jpg",
+      "category": "case-study-commercial",
+      "highlight": "100kW remote NQ install — flagship job",
+      "tech": ["Jinko panels", "Schletter racking", "Sigenergy inverters", "96kW battery storage"],
+      "caption": "☀️ The boys are headed up to North Queensland! Tackling a massive 100 kW solar install on a remote property — powered by Jinko panels, Schletter racking, Sigenergy inverters, and 96 kW of battery storage ⚡️🌴. Remote location, big energy — nothing we can't handle 💪 #SolarPower #NorthQueensland #RenewableEnergy #OffGrid #sse"
+    },
+    {
+      "id": "DNK4dt9TITb",
+      "type": "post",
+      "url": "https://www.instagram.com/shockedsolarandelectrical/p/DNK4dt9TITb/",
+      "thumbnail_url": "https://instagram.fbne5-1.fna.fbcdn.net/v/t51.82787-15/530636488_17848455348537192_2934778308159942776_n.jpg?stp=dst-jpg_e35_p640x640_sh2.08_tt6",
+      "local": "assets/gallery/11-DNK4dt9TITb.jpg",
+      "category": "case-study-aircon-electrical",
+      "highlight": "AC relocation + patio electrical fitout (Alan's job)",
+      "caption": "The boys had their work cut out at Alan's! It was necessary we relocated 2 split system air conditioners to make room for a monster fly over patio 🧐. Once built we roughed in and fit off the sandwich insulated patio, entertainment area and future kitchenette… This project turned out a treat 🤩. If you're looking to do something similar, get in contact with us…"
+    }
+  ]
+}

@@ -1,0 +1,773 @@
+{
+  "hero": {
+    "headline": "Why not go solar?",
+    "subhead": "Premium solar, air-con and electrical across Brisbane and surrounds. Same kit we wire into 100kW commercial jobs. Backed by our 10 Year Installation Warranty.",
+    "primary_cta": "Check my suburb",
+    "secondary_cta": "Call 0490 482 632",
+    "photo_local_path": "assets/gallery/03-DYwKM2hGsQd.webp",
+    "canvas_spec": "Single Canvas 2D layer, full-bleed behind hero copy, driven by ONE scroll-progress variable p (0..1) mapped from window.scrollY / heroHeight. At p=0 render ~90 cyan voltage-arc segments (zig-zag bezier paths, stroke #00D9FF at 0.35 alpha, lineWidth 1.5, additive blend) that lerp gently toward mouseY with proximityFactor; at p=1 render the same particle pool as warm sun rays radiating from a fixed sun-anchor at (0.7vw, 0.3vh), stroke #FFB800 at 0.45 alpha, no cursor reactivity. Each particle's hue/colour interpolates HSL(190,100%,50%)->HSL(40,100%,50%) by p; arc-jaggedness interpolates to ray-straightness by p. Backdrop is hero photo (03-DYwKM2hGsQd.webp — SolaX 50kWh whole-home battery + LONGi panels) at 0.35 opacity over #0A0B0F. IntersectionObserver pauses rAF off-screen; prefers-reduced-motion renders one static composite (arcs+rays both at 0.5 alpha, no animation); on touch devices (matchMedia('(hover: hover)') false) cursor-bias is disabled but scroll morph stays; canvas sized to devicePixelRatio with willReadFrequently:false; resize debounced 250ms."
+  },
+  "palette": {
+    "primary": "#00D9FF",
+    "primary_role": "Electrical lineage — voltage arcs, link underlines, focus rings, primary CTA border-glow, count-up numerals, suburb-check success tick",
+    "secondary": "#FFB800",
+    "secondary_role": "Solar lineage — sun rays, savings calculator fill, warranty badge, kW figures in stat rows",
+    "accent_navy": "#0A1E3E",
+    "bg": "#0A0B0F",
+    "surface": "#11141A",
+    "surface_raised": "#161A22",
+    "text_primary": "#F4F6FA",
+    "text_muted": "#9BA3B4",
+    "text_subtle": "#5C6477",
+    "success": "#33D17A",
+    "warning": "#FFB800",
+    "danger": "#FF4D5E",
+    "lines": "rgba(255,255,255,0.08)",
+    "lines_strong": "rgba(255,255,255,0.16)",
+    "glow_cyan": "0 0 32px -4px rgba(0,217,255,0.45)",
+    "glow_amber": "0 0 32px -4px rgba(255,184,0,0.40)",
+    "gradient_hero": "linear-gradient(180deg, #0A0B0F 0%, #0E1118 100%)",
+    "gradient_text_signature": "linear-gradient(92deg, #00D9FF 0%, #F4F6FA 55%, #FFB800 100%)"
+  },
+  "typography": {
+    "display_family": "Manrope, system-ui, -apple-system, 'Segoe UI', sans-serif",
+    "body_family": "Inter, system-ui, -apple-system, 'Segoe UI', sans-serif",
+    "scale": {
+      "load_strategy": "Self-host both via @font-face with font-display:swap. Preload Manrope 700 and Inter 400 (subset latin). Manrope weights 500/600/700/800; Inter 400/500/600.",
+      "display_settings": "Manrope display defaults: font-weight 700, letter-spacing -0.025em, line-height 0.98, text-wrap balance, hyphens none.",
+      "body_settings": "Inter body defaults: font-weight 400, letter-spacing -0.005em, line-height 1.55, text-wrap pretty.",
+      "--text-xs": "0.75rem / 12px · lh 1.4 · tracking 0.02em (eyebrows, captions)",
+      "--text-sm": "0.875rem / 14px · lh 1.5 (micro-copy, form helpers)",
+      "--text-base": "1rem / 16px · lh 1.55 (body; MIN on inputs to stop iOS zoom)",
+      "--text-lg": "1.125rem / 18px · lh 1.55 (lead paragraphs)",
+      "--text-xl": "1.25rem / 20px · lh 1.45 (card titles)",
+      "--text-2xl": "clamp(1.4rem, 1.2rem + 0.8vw, 1.625rem) · lh 1.3 (sub-section H3)",
+      "--text-3xl": "clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem) · lh 1.2 (section H2)",
+      "--text-4xl": "clamp(2.25rem, 1.8rem + 2vw, 3rem) · lh 1.1 (key callouts)",
+      "--text-5xl": "clamp(2.75rem, 2.2rem + 2.6vw, 3.75rem) · lh 1.05 (big stats, calculator readout)",
+      "--text-6xl": "clamp(3.25rem, 2.6rem + 3.4vw, 4.5rem) · lh 1.02 (section heroes)",
+      "--text-7xl": "clamp(3.75rem, 2.8rem + 4.6vw, 5.5rem) · lh 1.0 (hero H1 desktop)",
+      "--text-8xl": "clamp(4.5rem, 3.4rem + 5.6vw, 6.75rem) · lh 0.98 (oversized eyebrow optional)",
+      "--text-9xl": "clamp(5.5rem, 4rem + 7.2vw, 8.5rem) · lh 0.95 (decorative numerals only)"
+    }
+  },
+  "sections": [
+    {
+      "id": "nav",
+      "title": "Sticky nav",
+      "layout": "header role=banner, 72px tall desktop / 56px mobile, position:sticky top:0, backdrop-filter:blur(14px), bg rgba(10,11,15,0.75), border-bottom 1px var(--lines). Grid: [logo] [primary nav center] [phone link + Get quote button right]. On mobile collapses to logo + tel: button + hamburger (drawer slides from right, full-height, cyan accent rail).",
+      "copy": {
+        "logo": "Shocked Solar & Electrical",
+        "nav_links": [
+          "Services",
+          "Recent work",
+          "Savings",
+          "Why Shocked",
+          "FAQ",
+          "Quote"
+        ],
+        "phone_label_desktop": "0490 482 632",
+        "phone_label_mobile": "Call",
+        "cta": "Get a free quote"
+      },
+      "interactions": [
+        "IntersectionObserver on hero sentinel toggles .scrolled (nav drops shadow + opacity 0.95 -> solidifies)",
+        "On scroll past hero, condensed suburb-check (input + button only, 44px) slides down inside nav from translateY(-100%) to 0 over 280ms",
+        "Underline-from-left hover on nav links (1px cyan, width 0->100% over 260ms cubic-bezier(0.4,0,0.2,1))",
+        "Mobile drawer respects prefers-reduced-motion (fade only, no slide)"
+      ],
+      "assets": [
+        "assets/logo/profile.webp (mark in 32px circle, cyan 1px ring on hover)"
+      ]
+    },
+    {
+      "id": "hero",
+      "title": "Hero — voltage to sun",
+      "layout": "section min-height:100svh, grid: canvas (absolute, full-bleed, z-index 0) + content (z-index 2, padded 88px top, content max-width 1180px). Content: tiny eyebrow row (cyan dot + 'Brisbane · Logan · Ipswich'), H1 left-aligned (max 11ch desktop), subhead (max 52ch), suburb-check form, supporting trust row (10 year warranty pill + ABN line). Hero photo sits behind canvas at 0.35 opacity with linear-gradient overlay to bottom for legibility.",
+      "copy": {
+        "eyebrow": "Brisbane · Logan · Ipswich · Scenic Rim",
+        "h1": "Why not go solar?",
+        "subhead": "Premium solar, air-con and electrical across Brisbane and surrounds. Same kit we wire into 100kW commercial jobs. Backed by our 10 Year Installation Warranty.",
+        "suburb_placeholder": "Your suburb or postcode",
+        "suburb_button": "Check my suburb",
+        "trust_pill": "10 Year Installation Warranty",
+        "trust_line": "ABN 27 684 898 762 · Shocked Solar & Electrical Pty Ltd",
+        "supporting_strip": "Solar. Power. Comfort."
+      },
+      "interactions": [
+        "Canvas voltage->sun morph (see canvas_spec) driven by scroll",
+        "Word-by-word reveal on H1 (Manrope inner-span translateY 100%->0, opacity 0->1, stagger 0.04, expo.out, on DOMContentLoaded after fonts.ready)",
+        "Suburb-check inline validation (250ms simulated query, never-says-no soft-no fallback)",
+        "Subhead fades in 200ms after H1 completes",
+        "Sticky condensed CTA appears in nav past 70vh scroll"
+      ],
+      "assets": [
+        "assets/gallery/03-DYwKM2hGsQd.webp (SolaX 50kWh battery + LONGi residential — main hero plate)"
+      ]
+    },
+    {
+      "id": "suburb-result",
+      "title": "Suburb result panel (inline, conditional)",
+      "layout": "Appears IN PLACE inside hero suburb-check container as a 2-row card (success: green check + 'Yes, we service [Suburb]' + scroll-to-quote button; soft-no: amber dot + 'Outside our standard run — call 0490 482 632, we travel for bigger jobs' + tel button). aria-live=polite. 200ms slide-in.",
+      "copy": {
+        "success_template": "Yep — we cover {suburb}. Lock in a free quote and we will lock in a time.",
+        "success_cta": "Get my free quote",
+        "softno_template": "{suburb} is outside our standard run, but we travel for the bigger jobs. Give us a ring.",
+        "softno_cta": "Call 0490 482 632",
+        "store_key": "ssec_suburb"
+      },
+      "interactions": [
+        "Result panel writes selected suburb to sessionStorage('ssec_suburb') for quote-form prefill",
+        "Success button GSAP-scrolls to #quote section, focuses first input",
+        "dataLayer push {event:'suburb_check', suburb, outcome} for later analytics"
+      ],
+      "assets": []
+    },
+    {
+      "id": "trust-strip",
+      "title": "Trust strip marquee",
+      "layout": "Full-width band, 96px tall, surface bg with 1px top + bottom lines, mask-image fade edges. Single row of trust pills + brand chips scrolling left at 50s linear infinite, paused on hover. Each pill: 40px tall, surface-raised bg, 1px cyan border at 0.2 alpha, Manrope 600 14px.",
+      "copy": {
+        "pills": [
+          "10 Year Installation Warranty",
+          "Residential + Commercial",
+          "100kW jobs delivered",
+          "SolaX · GoodWe · Jinko · LONGi · TCL · Sigenergy",
+          "Schletter racking",
+          "Up to 96kWh battery storage",
+          "Brisbane · Logan · Ipswich",
+          "Pty Ltd · ABN 27 684 898 762"
+        ]
+      },
+      "interactions": [
+        "CSS-keyframe translateX, GPU-composited",
+        "Duplicate set marked aria-hidden=true",
+        "prefers-reduced-motion stops the loop, stacks pills in 2 rows centred",
+        "On viewports <768px gap drops 32px->16px, duration 30s"
+      ],
+      "assets": []
+    },
+    {
+      "id": "three-pillars",
+      "title": "Three pillars — Solar / Air-con / Electrical",
+      "layout": "section dark bg, 120px vertical padding. H2 left + lead right (two-col 5/7 desktop, stacked mobile). Below: grid of 3 expanded cards (1fr 1fr 1fr desktop, stacked mobile), each card 480px min-height, surface-raised bg, 1px lines border, 24px radius, padding 36px. Each card has: animated SVG icon top-left (cyan stroke draw-in), pillar number 01/02/03 top-right (Manrope 600 14px muted), pillar title (text-3xl), 3-line body, bulleted spec list (5 items), photo strip at bottom (one real install thumbnail per pillar).",
+      "copy": {
+        "eyebrow": "What we do",
+        "h2": "Three trades. One crew. One call.",
+        "lead": "Solar, air-con and general electrical — all done by the same team, to the same spec we wire into commercial sites. No subbies, no commodity tier.",
+        "cards": [
+          {
+            "num": "01",
+            "title": "Solar + battery",
+            "body": "Premium panels, inverters and battery storage from SolaX, GoodWe, Jinko, LONGi and TCL. Residential and commercial, from 13kW homes to 100kW remote properties. Clean installs, honest advice, real savings, and a 10 Year Installation Warranty on every system the team puts up.",
+            "bullets": [
+              "Residential + commercial",
+              "Battery storage up to 96kWh",
+              "Whole-home backup",
+              "Federal STC rebate handled",
+              "10 Year Installation Warranty"
+            ],
+            "thumb": "assets/gallery/10-DQlR5EGkyhf.jpg"
+          },
+          {
+            "num": "02",
+            "title": "Air conditioning",
+            "body": "Split-system supply, install and relocation across Brisbane. Single bedroom heads, multi-head fit-outs, or shifting units to clear room for a monster patio build. We size it right, mount it clean, leave the wiring tidy behind every cover.",
+            "bullets": [
+              "Split systems sized for SEQ summer",
+              "Multi-head fit-outs",
+              "Relocation + re-pipe",
+              "Patio + entertainment area integration",
+              "Quiet, compliant, tested under load"
+            ],
+            "thumb": "assets/gallery/11-DNK4dt9TITb.webp"
+          },
+          {
+            "num": "03",
+            "title": "General electrical",
+            "body": "Sparky work done properly. Kitchen appliance installs, lighting, power, patio fit-outs, entertainment areas and switchboard work when the existing board cannot safely handle a new load. Residential and commercial. Roughed in, fit off and tested under load. Powered the right way, every job.",
+            "bullets": [
+              "Kitchen appliance install + fit-off",
+              "Lighting + power",
+              "Patio + entertainment electrical",
+              "Switchboard work as required",
+              "Residential + commercial"
+            ],
+            "thumb": "assets/gallery/06-DX6gXyFCd6h.webp"
+          }
+        ]
+      },
+      "interactions": [
+        "Cards stagger-fade-up on scroll (y:48->0, opacity:0->1, stagger 0.12, expo.out, ScrollTrigger start: top 80%)",
+        "Per-card cursor spotlight (--card-mx, --card-my radial-gradient at 12% cyan opacity)",
+        "Hover lift translateY(-6px) + glow-cyan box-shadow",
+        "Icon SVG strokeDashoffset draw-in on enter",
+        "Mobile: hover effects disabled, :active scale(0.98)"
+      ],
+      "assets": [
+        "assets/gallery/10-DQlR5EGkyhf.jpg (100kW NQ flagship)",
+        "assets/gallery/11-DNK4dt9TITb.webp (AC + patio fit-out)",
+        "assets/gallery/06-DX6gXyFCd6h.webp (kitchen electrical)"
+      ]
+    },
+    {
+      "id": "savings-calc",
+      "title": "Brisbane savings calculator",
+      "layout": "section, surface bg, 120px padding. Two-col 6/6 desktop, stacked mobile. Left: eyebrow + H2 + 3-line intro + system-size slider (3kW-20kW) with tick labels + battery toggle (no battery / 13.5kWh / 27kWh). Right: stacked readout — Annual savings (text-5xl amber, eased count-up), 25-year savings (text-3xl muted), payback estimate (text-2xl cyan), and a small disclaimer line. Bottom: 'Pencil the numbers — book a real quote' button (primary).",
+      "copy": {
+        "eyebrow": "Brisbane payback",
+        "h2": "Drag the slider. See the savings.",
+        "intro": "Based on a Brisbane roof getting 5 peak sun hours a day, 40% self-consumption, current Energex tariffs and the federal STC rebate. Real numbers depend on your usage and retailer — book a quote for the exact figure.",
+        "slider_label": "System size (kW)",
+        "battery_label": "Battery",
+        "battery_options": [
+          "No battery",
+          "13.5 kWh",
+          "27 kWh"
+        ],
+        "out1_label": "Estimated annual saving",
+        "out2_label": "Over 25 years",
+        "out3_label": "Payback in roughly",
+        "disclaimer": "Estimate only. Final savings depend on your usage pattern, retailer plan and current STC + Cheaper Home Batteries rebate tier at quote time.",
+        "cta": "Pencil the numbers — book a real quote"
+      },
+      "interactions": [
+        "Native range input, 16px+ font, 32px thumb on touch",
+        "rAF-eased count-up on output (lerp 0.18, en-AU number format)",
+        "Slider fill via CSS var --fillPct, amber gradient",
+        "Battery toggle as 3-state segmented control updates a constant SELF_CONSUMPTION (no batt 0.4 / 13.5 0.65 / 27 0.85)",
+        "Disclaimer fades in after first interaction"
+      ],
+      "assets": []
+    },
+    {
+      "id": "recent-work",
+      "title": "Recent work — proof grid",
+      "layout": "section, bg #0A0B0F, 120px padding. H2 left, eyebrow above. Below: asymmetric grid — 1 hero tile (col-span-2 row-span-2) showing the 100kW NQ flagship + 5 supporting tiles in a CSS grid auto-flow:dense. Each tile: 24px radius, 1px lines border, full-bleed photo, gradient overlay bottom 50%, kW/spec chip top-left, project name + location bottom-left. Hover: scale image 1.05 + lift card 6px + glow cyan.",
+      "copy": {
+        "eyebrow": "Recent work",
+        "h2": "Real jobs. Real spec sheets.",
+        "lead": "Every install on this page has been delivered by the team. Brand names are the kit we actually put up.",
+        "tiles": [
+          {
+            "photo": "assets/gallery/10-DQlR5EGkyhf.jpg",
+            "chip": "100 kW · Off-grid",
+            "title": "Remote NQ property",
+            "spec": "Jinko panels · Schletter racking · Sigenergy inverters · 96 kWh battery",
+            "alt": "100 kW solar array on a remote North Queensland property — Jinko panels, Schletter racking, Sigenergy inverters, 96 kWh battery storage"
+          },
+          {
+            "photo": "assets/gallery/02-DYwL2LtqA1l-reel.jpg",
+            "chip": "21 kW · Commercial",
+            "title": "Mount Gravatt commercial",
+            "spec": "TCL 440W panels · GoodWe 20kW 3-phase inverter",
+            "alt": "21 kW commercial solar install in Mount Gravatt with TCL 440W panels and GoodWe 20kW 3-phase inverter"
+          },
+          {
+            "photo": "assets/gallery/03-DYwKM2hGsQd.webp",
+            "chip": "13.3 kW + 50 kWh battery",
+            "title": "Whole-home backup",
+            "spec": "LONGi Hi-MO X10 panels · 10kW SolaX inverter · 50kWh SolaX battery",
+            "alt": "Whole-home backup install with LONGi Hi-MO X10 panels, SolaX inverter and SolaX 50kWh battery"
+          },
+          {
+            "photo": "assets/gallery/04-DYtoSH4Gue.webp",
+            "chip": "13.2 kW · Shed",
+            "title": "13.2 kW shed solar",
+            "spec": "Workshop run cleanly, built to perform",
+            "alt": "13.2 kW solar system installed on a Queensland shed"
+          },
+          {
+            "photo": "assets/gallery/07-DX6bbvVCXqV.webp",
+            "chip": "Engineering",
+            "title": "Landscape config — wind rating",
+            "spec": "Re-thought on site for compliance without losing yield",
+            "alt": "Solar array re-configured to landscape orientation to meet wind rating compliance"
+          },
+          {
+            "photo": "assets/gallery/11-DNK4dt9TITb.webp",
+            "chip": "AC + Patio",
+            "title": "Patio fit-out + AC relocation",
+            "spec": "Split systems relocated, fly-over patio roughed in and fit off",
+            "alt": "Two split system air conditioners relocated and patio entertainment area roughed in"
+          }
+        ]
+      },
+      "interactions": [
+        "Tiles stagger-reveal y:32->0 stagger 0.06",
+        "Image scale on hover (transform:scale(1.05) 600ms ease-out)",
+        "Click opens lightbox (vanilla — overlay + full-res .jpg + Esc/click-out close + arrow-key navigation)",
+        "Lazy-load images below first 2 (loading=lazy decoding=async)",
+        "ScrollTrigger refresh on lightbox close"
+      ],
+      "assets": [
+        "assets/gallery/10-DQlR5EGkyhf.jpg",
+        "assets/gallery/02-DYwL2LtqA1l-reel.jpg",
+        "assets/gallery/03-DYwKM2hGsQd.webp",
+        "assets/gallery/04-DYtoSH4Gue.webp",
+        "assets/gallery/07-DX6bbvVCXqV.webp",
+        "assets/gallery/11-DNK4dt9TITb.webp"
+      ]
+    },
+    {
+      "id": "why-shocked",
+      "title": "Why Shocked — the standard",
+      "layout": "section, surface bg, 140px padding. Two-col 7/5 desktop. Left: eyebrow + H2 + 4 body paragraphs in long-form. Right: sticky-position stat panel with 4 count-up tiles (2x2 grid) — 100 kW · largest install / 96 kWh · biggest battery / 10 yr · installation warranty / 5+ · tier-1 brands. Below: photo of one real install full-bleed across the section.",
+      "copy": {
+        "eyebrow": "The 100kW standard",
+        "h2": "Same kit on your roof as on a commercial site.",
+        "body_paragraphs": [
+          "The team started Shocked Solar & Electrical to do solar properly. Premium kit, clean installs, honest pricing. No commodity tier.",
+          "We have tackled a 100kW remote North Queensland job on Jinko, Schletter and Sigenergy with 96kWh of battery storage. We have wired up a 21kW commercial site in Mount Gravatt on TCL 440W panels and a GoodWe 3-phase inverter. We have run a 13.3kW LONGi Hi-MO X10 system into a 50kWh SolaX battery for whole-home backup.",
+          "We have rethought a system on site to a landscape config when wind ratings changed the game. We have relocated split systems to clear room for a monster fly-over patio, then roughed in and fit off the kitchenette behind it.",
+          "Big jobs, small jobs, residential or commercial. Every install backed by our 10 Year Installation Warranty."
+        ],
+        "stats": [
+          {
+            "value": "100",
+            "suffix": "kW",
+            "label": "Largest install delivered"
+          },
+          {
+            "value": "96",
+            "suffix": "kWh",
+            "label": "Biggest battery wired"
+          },
+          {
+            "value": "10",
+            "suffix": "yr",
+            "label": "Installation warranty"
+          },
+          {
+            "value": "6",
+            "suffix": "+",
+            "label": "Tier-1 brands installed"
+          }
+        ]
+      },
+      "interactions": [
+        "Right stat panel position:sticky top:120px through the section",
+        "Count-up animates on enter (IntersectionObserver threshold 0.4, 1800ms ease-out-expo)",
+        "Body paragraphs char-stagger on first-paragraph only, rest fade-in to keep perf",
+        "Below-fold photo parallax (transform translateY scrub 0.6, range -40px to 40px)"
+      ],
+      "assets": [
+        "assets/gallery/01-DY27kAgzr9B.webp (full-bleed panel close-up below the stat panel)"
+      ]
+    },
+    {
+      "id": "service-area-map",
+      "title": "Service area — Leaflet",
+      "layout": "section, dark bg, 120px padding. Two-col 5/7 desktop. Left: H2 + lead + bullet list of suburb clusters (Brisbane south / Logan / Ipswich east / Scenic Rim) + soft-no fallback line. Right: Leaflet map (480px desktop / 320px mobile, 24px radius, 1px lines border, dark Carto tile layer). Map shows a service-area polygon shaded in cyan at 0.15 alpha + a pulsing marker at HQ (Boronia Heights centroid). Loads lazily on IntersectionObserver to keep Leaflet ~40KB out of initial bundle.",
+      "copy": {
+        "eyebrow": "Service area",
+        "h2": "Where the team works.",
+        "lead": "Brisbane south, Logan, Ipswich east and Scenic Rim for everyday work. For larger commercial and off-grid jobs the team travels further — including remote North Queensland — so if you sit outside the standard run, ring us and we will talk it through.",
+        "clusters": [
+          {
+            "name": "Brisbane south",
+            "items": "Mount Gravatt · Sunnybank · Salisbury · Moorooka · Tarragindi · Carindale"
+          },
+          {
+            "name": "Logan",
+            "items": "Browns Plains · Boronia Heights · Springwood · Beenleigh · Loganholme · Daisy Hill"
+          },
+          {
+            "name": "Ipswich east",
+            "items": "Springfield · Goodna · Camira · Bellbird Park · Gailes"
+          },
+          {
+            "name": "Scenic Rim fringe",
+            "items": "Jimboomba · Greenbank · Cedar Vale · Yarrabilba · Flagstone"
+          }
+        ],
+        "softno": "Outside Brisbane / Logan / Ipswich? Bigger jobs welcome — call 0490 482 632."
+      },
+      "interactions": [
+        "Lazy-import Leaflet on IntersectionObserver enter (rootMargin 200px)",
+        "Marker pulse via CSS animation on a divIcon (cyan dot 16px + concentric ring scaling 1->2.4 alpha 0.6->0 over 1800ms)",
+        "Polygon hover-state increases alpha to 0.25",
+        "scrollWheelZoom disabled by default (Leaflet best practice for content sites); tap-to-enable hint on mobile",
+        "Map respects prefers-reduced-motion (no marker pulse)"
+      ],
+      "assets": []
+    },
+    {
+      "id": "quote",
+      "title": "Quote form",
+      "layout": "section, surface bg, 120px padding. Centred max-width 720px form on a card (surface-raised bg, 32px padding, 24px radius, 1px lines border, glow-cyan on the form's primary CTA only). H2 + 1-line lead above. Form fields stacked: Name / Phone / Email / Suburb (prefilled from sessionStorage) / Service interested in (checkboxes: Solar / Battery / Air-con / Electrical / Not sure yet) / Tell us about the job (textarea, optional). Honeypot field 'website' visually hidden. Submit via Web3Forms (placeholder key swapped at deploy). Success panel replaces form in place. Error panel surfaces below submit.",
+      "copy": {
+        "eyebrow": "Free quote",
+        "h2": "Tell us about the job.",
+        "lead": "Hit send and the team will get back to you to lock in a time. No automated tedium, just a real reply.",
+        "fields": {
+          "name": "Your name",
+          "phone": "Phone",
+          "email": "Email",
+          "suburb": "Suburb or postcode",
+          "interests_label": "What are you after?",
+          "interests": [
+            "Solar + battery",
+            "Air-conditioning",
+            "General electrical",
+            "Not sure yet"
+          ],
+          "message": "Tell us about the job (optional)"
+        },
+        "consent": "By sending this you agree to be contacted about your quote. We will never share your details.",
+        "cta": "Send to the team",
+        "success_h": "Got it.",
+        "success_body": "Cheers — the team will be in touch shortly. If it's urgent give us a bell on 0490 482 632.",
+        "error_body": "Couldn't send that one. Try again, or call us on 0490 482 632 and we'll sort it."
+      },
+      "interactions": [
+        "Inline validation on blur (real email regex, phone min 8 digits, name required)",
+        "Honeypot 'website' field — reject submit if filled",
+        "Submit button shows inline spinner during fetch, disabled state, restores on response",
+        "On success: GSAP fade form out (260ms) + fade success card in",
+        "Suburb prefilled from sessionStorage('ssec_suburb') on DOMContentLoaded",
+        "All inputs 16px+ font, 48px tall, 12px radius, focus ring cyan 2px"
+      ],
+      "assets": []
+    },
+    {
+      "id": "faq",
+      "title": "FAQ — straight answers",
+      "layout": "section, bg #0A0B0F, 120px padding. Two-col 4/8 desktop (left: H2 + 'still got a question?' tel link / right: <details> accordion stack). Each item: <details> with <summary> (Manrope 600 18px, 24px padding, chevron right that rotates 90deg on open) + <p> body (Inter 16px lh 1.6, muted colour). 1px line between items. Native <details> for free a11y.",
+      "copy": {
+        "eyebrow": "FAQ",
+        "h2": "Straight answers.",
+        "side_cta": "Still got a question? Ring the team on 0490 482 632."
+      },
+      "interactions": [
+        "Native <details>/<summary> handles open/close + keyboard",
+        "JS enhancement: on toggle, gsap.fromTo(body, {height:0}, {height:'auto', duration:0.32, ease:'power2.out'})",
+        "Chevron rotates via CSS [open] selector",
+        "Scroll-into-view on open if near viewport bottom"
+      ],
+      "assets": []
+    },
+    {
+      "id": "cta-banner",
+      "title": "Closing CTA banner",
+      "layout": "section, full-bleed, 280px tall. Background: hero photo (the 100kW NQ flagship) at 0.4 opacity + linear-gradient(135deg, #0A1E3E 0%, transparent 60%) overlay. Centred content: oversized H2 (text-6xl), 1-line subhead, two CTAs side-by-side (primary 'Get a free quote' + secondary 'Call 0490 482 632').",
+      "copy": {
+        "h2": "Right kit. Right install. Powered the right way.",
+        "subhead": "Get a free quote on solar, air-con or electrical — Brisbane and surrounds.",
+        "primary_cta": "Get a free quote",
+        "secondary_cta": "Call 0490 482 632"
+      },
+      "interactions": [
+        "H2 word-stagger reveal on enter",
+        "Primary CTA magnetic (gsap.quickTo, strength 0.4, radius 120px) — disabled on touch",
+        "Background subtle parallax (scrub 0.8)"
+      ],
+      "assets": [
+        "assets/gallery/10-DQlR5EGkyhf.jpg"
+      ]
+    },
+    {
+      "id": "footer",
+      "title": "Footer",
+      "layout": "footer role=contentinfo, surface bg, 80px top padding / 32px bottom. Grid: [brand block 4col] [services 2col] [areas 2col] [contact 4col] on desktop, stacked mobile. Bottom row: copyright + ABN + legal links + IG icon, separated by 1px top line.",
+      "copy": {
+        "brand_tag": "Quality solar, air-con and electrical. Powered the right way.",
+        "services_h": "Services",
+        "services_items": [
+          "Solar + battery",
+          "Air conditioning",
+          "General electrical",
+          "Commercial installs",
+          "Whole-home backup"
+        ],
+        "areas_h": "Service area",
+        "areas_items": [
+          "Brisbane south",
+          "Logan",
+          "Ipswich east",
+          "Scenic Rim",
+          "Larger jobs — wider SEQ + NQ"
+        ],
+        "contact_h": "Contact",
+        "contact_items": [
+          "0490 482 632",
+          "shockedsolarelectrical@gmail.com",
+          "Instagram @shockedsolarandelectrical"
+        ],
+        "legal_line": "Shocked Solar & Electrical Pty Ltd · ABN 27 684 898 762 · 10 Year Installation Warranty on every install",
+        "copyright": "© 2026 Shocked Solar & Electrical Pty Ltd. All rights reserved."
+      },
+      "interactions": [
+        "IG icon hover fills cyan",
+        "Phone + email are real tel:/mailto: links",
+        "All links keyboard-focusable with cyan focus ring"
+      ],
+      "assets": [
+        "assets/logo/profile.webp"
+      ]
+    },
+    {
+      "id": "mobile-call-bar",
+      "title": "Mobile sticky call bar",
+      "layout": "header position:fixed top:0 left:0 right:0, 56px tall, ONLY @media (max-width:768px). bg rgba(10,11,15,0.85) backdrop-filter blur(12px), 1px bottom border cyan. Single tap target: whole bar is a tel: link. Icon left + 'Call 0490 482 632' text right, centred. Hidden by default (translateY(-100%)), reveals after scroll past 400px via IntersectionObserver on hero sentinel.",
+      "copy": {
+        "label": "Call 0490 482 632",
+        "aria_label": "Call Shocked Solar and Electrical on 0490 482 632"
+      },
+      "interactions": [
+        "IntersectionObserver on hero sentinel toggles .visible class",
+        "transform transition 240ms ease",
+        "safe-area-inset-top padding for notched iPhones",
+        "Hidden on desktop"
+      ],
+      "assets": []
+    }
+  ],
+  "component_techniques": {
+    "01_hero_canvas_morph": "Single Canvas 2D, devicePixelRatio-aware sizing, single rAF loop. Particle pool of ~90 objects {baseX, baseY, x, y, vx, vy, jag, hue}. p = clamp(scrollY/heroH, 0, 1). For each particle: targetX biased by ±jag*(1-p) (arcs are wavy, rays straight); colour = lerpHSL(190->40, by p); cursor-bias only when p<0.5 AND matchMedia('(hover:hover)'). ctx.globalCompositeOperation='lighter' for additive glow. Wrap entire RAF in IntersectionObserver pause/resume. prefers-reduced-motion bypasses RAF — renders one static composite frame. Resize debounced 250ms. Code budget ~120 lines.",
+    "02_suburb_check_combobox": "Native input + JS-enhanced listbox. ARIA combobox pattern (role=combobox, aria-autocomplete=list, aria-expanded, aria-controls, aria-activedescendant). Local SUBURBS array (see suburbs[]). Filter: 150ms debounce, startsWith pass then contains pass, top 8. Keyboard: Up/Down/Home/End/Esc/Enter. autocomplete='address-level2', inputmode='text', autocapitalize='words', font-size 16px+. Listbox max-height 40vh, 5 results on mobile. On submit/select: setTimeout 250ms then render success card (green tick) or soft-no (amber dot, never blocks). Write suburb to sessionStorage('ssec_suburb'). aria-live=polite on result panel.",
+    "03_magnetic_cta": "Per-button gsap.quickTo on x,y (duration 0.6, ease power3). Single document pointermove listener uses e.target.closest('.magnetic'). distance = Math.hypot(dx, dy); if distance<120 then setX(dx*0.4), setY(dy*0.4); else setX(0), setY(0). Inner label span translates at 0.7x parent for split-magnet feel. Disabled via @media(hover:none) and prefers-reduced-motion. Focus ring positioned on un-translated element. will-change:transform on hover-in only.",
+    "04_count_up_stat": "Single shared IntersectionObserver, threshold 0.4 desktop / 0.3 mobile, fires once per element (data-counted='1' guard). rAF loop interpolating 0 to data-target with easeOutExpo over 1800ms (1200ms mobile). Math.round each frame, textContent only. Final value written from data-target post-animation to avoid drift. Format with Intl.NumberFormat('en-AU'). Set aria-label on wrapper combining figure + context. prefers-reduced-motion: jump to final value, no animation.",
+    "05_service_card_spotlight": "Per-card pointermove sets --card-mx, --card-my as % of card bounds (namespaced to avoid clobbering global spotlight). ::before pseudo background:radial-gradient(circle 320px at var(--card-mx) var(--card-my), rgba(0,217,255,0.10), transparent 60%). Hover: translateY(-6px) + box-shadow var(--glow-cyan) + border-color var(--lines-strong). Disabled on @media(hover:none) then :active scale(0.98). Card is single <a> wrapping all content.",
+    "06_savings_calculator": "Native <input type=range> min=3 max=20 step=0.5 value=6.6. CSS gradient fill via --fillPct var. Brisbane constants: PEAK_SUN_HRS=5.0, TARIFF_KWH=0.30, FEED_IN=0.06, SELF_CONSUMP={no_batt:0.4, 13.5:0.65, 27:0.85}. annualSavings = kW * PEAK_SUN_HRS * 365 * (SELF * TARIFF + (1-SELF) * FEED_IN). 25-year = annual * 25 * 0.92 (panel degradation factor). Payback = installCost / annualSavings where installCost = 1200 * kW + (battery=='13.5'?12500:battery=='27'?22000:0) - stcRebate. rAF-eased count-up (lerp 0.18), Intl.NumberFormat('en-AU', {style:'currency', currency:'AUD', maximumFractionDigits:0}). Disclaimer visible inline.",
+    "07_recent_work_lightbox": "Pure vanilla. Overlay div (position:fixed, bg rgba(10,11,15,0.94), backdrop-filter blur 8px). On tile click open with current photo. Esc closes, click-out closes, left/right arrow keys navigate, focus-trap with tabindex. Loads full-res from .jpg (640px source already optimised). Lazy-mounts on first open. ScrollTrigger.refresh() on close. aria-modal=true, aria-label='Project photo viewer'.",
+    "08_voltage_divider_svg": "Hand-authored zig-zag SVG path, total length via getTotalLength(). stroke-dasharray + stroke-dashoffset both = length initially. On IntersectionObserver enter (threshold 0.3), transition stroke-dashoffset 1400ms ease-out to 0. Second path copy with stroke #00D9FF + filter:drop-shadow(0 0 6px currentColor), 200ms delay, glow trail. aria-hidden='true', focusable='false'. Skip animation via prefers-reduced-motion (set offset to 0 immediately). One animated divider per visible viewport max (perf budget on drop-shadow filter)."
+  },
+  "animation_choreography": "\"INIT (all on DOMContentLoaded + fonts.ready): 1) Lenis init lerp 0.09, smoothWheel true, smoothTouch false (iOS swipe-back conflict). 2) gsap.ticker.add(time => lenis.raf(time*1000)); gsap.ticker.lagSmoothing(0). 3) lenis.on('scroll', ScrollTrigger.update). 4) ScrollTrigger.refresh() after fonts.ready and on window 'load'. 5) Wrap each headline in word/inner spans BEFORE animation. PAGE ENTRY (0 to 1200ms): Hero canvas starts rAF immediately. H1 word-stagger reveal (gsap.from .inner, y:'100%' opacity:0, stagger:0.04, expo.out, duration:0.9). Subhead fade-in delay:0.4. Suburb-check fade-up delay:0.7. Trust-pill scale-in delay:0.9. Nav fade-in opacity 0->1 delay:0.2. SCROLL (heroH 0->1): Canvas voltage to sun morph driven by p=scrollY/heroH. Body bg gradient interpolates --bg-start, --bg-end via single ScrollTrigger scrub:1 timeline. Past 70vh: nav .scrolled class adds backdrop blur + condensed suburb-check slides in. Past hero: mobile call bar reveals via IntersectionObserver on hero sentinel. SECTION ENTRIES (start: top 80%): Each section eyebrow + H2 word-stagger. Card grids stagger 0.06-0.12 y:32->0 expo.out. Count-up stats fire on threshold 0.4. Photos lazy-load and fade-in opacity 0->1 200ms. Voltage SVG dividers draw-in 1400ms ease-out on enter. CONTINUOUS: Magnetic CTAs (only above the fold + closing banner). Cursor spotlight on document.body for desktop (CSS-only radial-gradient at --mx --my, mix-blend-mode:screen, opacity 0.15, fixed overlay pointer-events:none). Service card per-card spotlights. Marquee trust strip 50s linear infinite. Leaflet marker pulse 1800ms infinite. SCROLL-SCRUBBED: Why-Shocked photo parallax (translateY scrub:0.6, -40px to 40px). CTA banner background subtle parallax (scrub:0.8). REDUCED MOTION: matchMedia('(prefers-reduced-motion: reduce)') cancels ALL of: canvas rAF (one static composite), word-stagger reveals (snap to final via gsap.set), count-ups (snap), marquee (stop), magnetic (off), parallax (off), Leaflet marker pulse (off). Word reveals still render text.\"",
+  "suburbs": [
+    "Acacia Ridge",
+    "Algester",
+    "Annerley",
+    "Archerfield",
+    "Bahrs Scrub",
+    "Bannockburn",
+    "Beenleigh",
+    "Belivah",
+    "Bellbird Park",
+    "Berrinba",
+    "Bethania",
+    "Boronia Heights",
+    "Browns Plains",
+    "Buccan",
+    "Calamvale",
+    "Camira",
+    "Carbrook",
+    "Carindale",
+    "Cedar Grove",
+    "Cedar Vale",
+    "Chambers Flat",
+    "Coopers Plains",
+    "Cornubia",
+    "Crestmead",
+    "Daisy Hill",
+    "Drewvale",
+    "Durack",
+    "Eagleby",
+    "Edens Landing",
+    "Eight Mile Plains",
+    "Ellen Grove",
+    "Flagstone",
+    "Forest Lake",
+    "Forestdale",
+    "Gailes",
+    "Goodna",
+    "Greenbank",
+    "Heathwood",
+    "Heritage Park",
+    "Hillcrest",
+    "Holmview",
+    "Inala",
+    "Jimboomba",
+    "Karawatha",
+    "Kingston",
+    "Kuraby",
+    "Larapinta",
+    "Logan Central",
+    "Logan Reserve",
+    "Logan Village",
+    "Loganholme",
+    "Loganlea",
+    "Macgregor",
+    "Marsden",
+    "Meadowbrook",
+    "Middle Park",
+    "Moorooka",
+    "Mount Gravatt",
+    "Mount Gravatt East",
+    "Mount Warren Park",
+    "Munruben",
+    "New Beith",
+    "North Maclean",
+    "Pallara",
+    "Park Ridge",
+    "Park Ridge South",
+    "Parkinson",
+    "Priestdale",
+    "Regents Park",
+    "Richlands",
+    "Riverhills",
+    "Rochedale",
+    "Rochedale South",
+    "Runcorn",
+    "Salisbury",
+    "Shailer Park",
+    "Slacks Creek",
+    "South Maclean",
+    "Spring Mountain",
+    "Springfield",
+    "Springfield Central",
+    "Springfield Lakes",
+    "Springwood",
+    "Stockleigh",
+    "Stretton",
+    "Sumner",
+    "Sunnybank",
+    "Sunnybank Hills",
+    "Tanah Merah",
+    "Tarragindi",
+    "Underwood",
+    "Upper Mount Gravatt",
+    "Waterford",
+    "Waterford West",
+    "Wishart",
+    "Woodridge",
+    "Yarrabilba",
+    "Yeronga"
+  ],
+  "faq": [
+    {
+      "q": "Do I still get the federal solar rebate?",
+      "a": "Yes. The federal small-scale rebate (STCs) is currently available on new systems and we handle the paperwork for you. You see the discount up front in the quote, not as a refund later. We will walk you through the exact rebate your system is eligible for before you sign anything."
+    },
+    {
+      "q": "What about the battery rebate?",
+      "a": "Yes. The federal Cheaper Home Batteries Program is currently available on new battery installs alongside solar. The exact dollar value depends on the battery size and which tier the scheme is in at the time of install, so we calculate it fresh at quote time and show it on the line item."
+    },
+    {
+      "q": "Do I really need a battery, or just panels?",
+      "a": "Depends on your bills, your usage and whether you want the lights on when the grid goes down. We have done full whole-home backup with 50kWh SolaX and we have done panels-only where it made more sense. Honest advice on the quote, not a sales pitch."
+    },
+    {
+      "q": "What brands do you actually install?",
+      "a": "SolaX, GoodWe, Jinko, LONGi, TCL and Sigenergy for solar and batteries. Schletter for racking. We pick the brand to suit the job, not the margin. Every panel and inverter we put up is a Tier-1 bankable brand with full Australian warranty support."
+    },
+    {
+      "q": "How do I know what size air-con I need?",
+      "a": "Room size, ceiling height, insulation, window orientation and how many people use the space. The team measures on site and sizes the head properly. Undersized units run flat out and die early. Oversized ones short-cycle. We get it right the first time."
+    },
+    {
+      "q": "Can you upgrade my switchboard at the same time as solar?",
+      "a": "Often yes. On a lot of older homes you have to, because the existing board cannot safely handle a new inverter or battery. If that is the case we will flag it up front in the quote and arrange it. One crew, one visit, one cost. No surprises mid-install."
+    },
+    {
+      "q": "How long does an install take?",
+      "a": "A standard residential solar system is usually a one-day install once your STC paperwork, your retailer paperwork and our material order are sorted. Bigger jobs and battery installs can run two to three days. We give you a real timeline in the quote, not a guess."
+    },
+    {
+      "q": "What does the 10 Year Installation Warranty cover?",
+      "a": "Everything the team puts up. Mounting and racking integrity, cable, conduit and isolator workmanship, roof penetration waterproofing, and all electrical connections. Manufacturer warranties on panels, inverters and batteries are separate and we walk you through those at handover."
+    },
+    {
+      "q": "What areas do you actually cover?",
+      "a": "Brisbane south, Logan, Ipswich east and Scenic Rim for everyday solar, air-con and electrical work. For larger commercial and off-grid jobs we travel further, including remote North Queensland. If you sit outside the standard run, ring us and we will talk it through."
+    },
+    {
+      "q": "How quickly can you get out for a quote?",
+      "a": "Call 0490 482 632 or send the form and we will lock in a time that suits. We will always give you a real answer on timing rather than a vague promise."
+    }
+  ],
+  "banned_phrases": [
+    "Brisbane's #1",
+    "Brisbane's most trusted",
+    "Queensland's most trusted",
+    "Australia's most trusted",
+    "award-winning solar experts",
+    "award-winning installers",
+    "family-owned and operated",
+    "bespoke solutions tailored to your needs",
+    "industry-leading",
+    "synergy",
+    "we go above and beyond",
+    "best-in-class customer experience",
+    "world-class",
+    "cutting-edge",
+    "next-generation",
+    "second to none",
+    "unparalleled",
+    "unrivalled",
+    "leverage",
+    "passionate about",
+    "your one-stop shop",
+    "Get a free no-obligation quote",
+    "Clean Energy Council Approved (until SAA accreditation verified)",
+    "CEC Accredited (until installer ID verified)",
+    "Master Electrician (until MEA membership verified)",
+    "5-star (until real reviews exist)",
+    "Real reviews coming soon",
+    "Coming soon",
+    "Lorem ipsum",
+    "Trusted by thousands",
+    "Hundreds of happy customers",
+    "Sorry, we don't service your area"
+  ],
+  "micro_copy": [
+    "Why not go solar?",
+    "Powered the right way.",
+    "Nothing we can't handle.",
+    "Same kit. Same crew. Same warranty.",
+    "Real jobs. Real spec sheets.",
+    "Drag the slider. See the savings.",
+    "Big jobs. Small jobs. Clean installs.",
+    "Quality kit. Honest pricing.",
+    "Sized right. Mounted clean.",
+    "Roughed in. Fit off. Tested under load.",
+    "Tell us about the job.",
+    "Lock in a time that suits.",
+    "Call the team. 0490 482 632"
+  ],
+  "au_facts": {
+    "stc_rebate": "Federal Small-scale Technology Certificate (STC) rebate is currently available on new solar installs and applied as an up-front discount at point of sale. Approximate per-kW value mid-2026 in Zone 3 (Brisbane): ~$259-$378/kW depending on daily STC spot price (~$37-$39) and the 7-year deeming period. Indicative figures: a 6.6kW system attracts roughly $1,710-$2,500; a 13.2kW system roughly $3,420-$5,000. STC eligibility caps at 100kW system size. The exact dollar value must be calculated at quote time using the REC Registry SGU/STC calculator. Never lock dollar amounts into hero copy without an 'approx' qualifier.",
+    "battery_rebate": "Federal Cheaper Home Batteries Program launched 1 July 2025 and is the primary battery incentive nationally. Pre-1-May-2026: ~$302/kWh discount (STC factor 8.4), capped ~$16,500 up to 50kWh usable. From 1 May 2026 a tiered structure applies (0-14kWh @ 100% STC factor, 14-28kWh @ 60%, 28-50kWh @ 15%) with the STC factor stepping down every six months. There is no QLD state solar rebate and no QLD state battery rebate in 2026. The QLD Battery Booster closed when the federal program launched. On-site copy must say 'federal rebate' and pull current tier at quote time.",
+    "warranty_norms": "Australian solar warranty industry standards split four ways: (1) Panel PRODUCT warranty: Tier-1 brands 12-25 years, premium 25-30. (2) Panel PERFORMANCE warranty: minimum 25 years mandated AU, 90% at year 10 / 80% at year 25. (3) Inverter warranty: 5-10 years string, 10-12 premium (SMA, Fronius, Sungrow, GoodWe), 10-25 microinverters/hybrids. (4) Workmanship/Installation warranty: 5 years industry standard, 5-10 years reputable, 10-year is premium positioning. A '10-year installation warranty' typically covers mounting and racking integrity, cable/conduit/isolator workmanship, roof penetration waterproofing, electrical connections, and rectification of installer-caused defects. It does NOT cover manufacturer faults on panels/inverters/batteries (those go via product warranty). Shocked's 10 Year Installation Warranty is at the premium end of the AU market and is a defensible differentiator.",
+    "qld_avg_bill": "Approximately $1,500 to $1,900/year for a typical 2-4 person Energex SEQ household on the FY2026 Default Market Offer. Average usage rate ~27-30c/kWh.",
+    "typical_6_6kw_savings": "A 6.6kW system in Brisbane generates ~27.7 kWh/day, ~10,100 kWh/year. Annual savings typically $1,400 to $2,400 depending on self-consumption vs export mix. Mid-range estimate $1,800 to $2,200/year. Payback period 3-5 years on current tariffs and STC rebate.",
+    "ac_sizing_guide": "Rule of thumb: ~125-150W per m2 for standard 2.4m ceiling, insulated room. Brisbane sub-tropical climate adds load. Round UP, not down. Indicative kW per room size: 10m2 = 2.0-2.5kW (bedroom/office); 20m2 = 2.5-3.5kW; 30m2 = 3.5-5.0kW; 50m2 = 5.0-7.2kW (open-plan, 6.0kW typical); 80m2 = 8.0-10.0kW (often ducted or multi-split at this size). Window orientation (west-facing glass) and ceiling height materially affect required capacity. Always subject to site assessment.",
+    "standards_compliance": "All work to AS/NZS 3000:2018 (Wiring Rules), AS/NZS 5033:2021 (PV array installation), AS/NZS 4777.1 and 4777.2:2020 (grid-connection inverters). Energex/SEQ DNSP export limits apply (single-phase typically 5kW inverter, three-phase up to 15kW; dynamic connections now default).",
+    "tier1_brands_shocked_installs": [
+      "Jinko Solar",
+      "LONGi Solar (Hi-MO X10 and equivalent)",
+      "TCL 440W high-efficiency panels",
+      "GoodWe (3-phase string inverters)",
+      "SolaX (10kW inverter + 50kWh battery storage proven)",
+      "Sigenergy (inverter + 96kWh battery proven on 100kW NQ install)",
+      "Schletter (racking)"
+    ],
+    "service_area_basis": "Brisbane south + Logan + Ipswich east + Scenic Rim within ~30km radius of Boronia Heights 4124 (Logan City). Larger commercial and off-grid work travelled further including remote North Queensland (case study basis, not a standard service area).",
+    "flags_for_build": [
+      "Verify Shocked's SAA/CEC installer accreditation number BEFORE displaying any CEC/SAA badge or claiming accreditation in copy.",
+      "Verify Master Electricians Australia membership BEFORE displaying MEA badge or 'Master Electrician' claim.",
+      "Confirm '10 Year Installation Warranty' is issued in writing as a customer document before publishing on site.",
+      "Verify ABN 27 684 898 762 on abr.business.gov.au before publishing in footer/schema.",
+      "Verify LONGi Hi-MO X10 SKU is the actual install kit (caption confirms; keep as-is unless contradicted at sign-off).",
+      "STC rebate $/kW figures fluctuate with STC spot price. Use 'approx' framing or pull live at quote time. Never hard-code a single dollar value into hero copy.",
+      "Federal Cheaper Home Batteries tier steps down every 6 months from May 2026. Disclaimer line must be present anywhere a battery rebate dollar value appears."
+    ]
+  },
+  "inspiration_patterns": [
+    {
+      "pattern": "Single-canvas morph driven by ONE scroll progress variable (NOT crossfade of two scenes)",
+      "implementation": "Inspired by Younergy + Dit is Watt. Canvas 2D, full-bleed hero, ~90 particles in a shared pool. p = clamp(scrollY / heroHeight, 0, 1). Same particles morph: at p=0 they render as cyan voltage-arc segments (jagged zig-zag bezier, additive blend); at p=1 they render as warm amber sun rays (straight lines from sun anchor, additive blend). Particle hue interpolates HSL(190,100%,50%) to HSL(40,100%,50%) by p. Cursor-bias active only when p<0.5. IntersectionObserver pauses RAF off-screen. prefers-reduced-motion bypasses RAF entirely. One static composite frame with both states at 0.5 alpha.",
+      "where": "Hero section only (top 100svh). Backdrop is real install photo (assets/gallery/03-DYwKM2hGsQd.webp) at 0.35 opacity so the canvas reads as 'energy flowing across our real work', not as a tech demo."
+    },
+    {
+      "pattern": "Suburb-check that never says no",
+      "implementation": "Inspired by Octopus + Sunrun, distilled to single-step. Native input + ARIA combobox + JS-enhanced listbox. Local SUBURBS array (96 entries, ~5KB). 150ms debounced filter, top 8 results. On submit: 250ms simulated query then success card (cyan tick + 'Yep, we cover [Suburb]. Lock in a free quote and we will lock in a time.' + button that scrolls to quote form) OR soft-no (amber dot + '[Suburb] is outside our standard run, but we travel for the bigger jobs. Give us a ring.' + tel button). Selected suburb saved to sessionStorage('ssec_suburb'), prefilled into quote form. Never blocks. aria-live=polite on result panel. Field font-size 16px+, tap target 48px+, autocomplete='address-level2'.",
+      "where": "Above-the-fold inside hero, replacing the typical 'Get a Quote' button. Re-shows in condensed form (input + button, 44px tall) inside the sticky nav past 70vh scroll. This is THE primary conversion entry point."
+    },
+    {
+      "pattern": "Editorial restraint with three beats of certainty + literal photographic proof grid",
+      "implementation": "Inspired by Tesla Energy + Sunrun. Hero subhead carries the three beats inline ('Solar. Power. Comfort.' as a supporting strip). Mid-page Recent Work grid is the literal payoff. 1 hero tile + 5 supporting tiles in asymmetric CSS grid, every tile a REAL install with kW chip + brand spec list overlaid. No stock photography anywhere on the page. This positions Shocked against the 7 audited competitors who all hide spec sheets behind quote forms. Verifiable hardware honesty becomes the differentiator. Builds direct on the audit finding: 'NOBODY shows specific kW system specs, real brand partners or installed-job data on the homepage hero.'",
+      "where": "Three beats: hero subhead strip + footer brand tag. Photographic proof: recent-work grid section + why-shocked full-bleed image + closing CTA banner background. Every photo path locked from /assets/gallery/. No AI imagery, no stock, no fakes."
+    }
+  ]
+}
