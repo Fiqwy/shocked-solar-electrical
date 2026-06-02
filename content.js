@@ -30,10 +30,11 @@ window.CONTENT = {
 
   hero: {
     eyebrow: 'Brisbane · Logan · Ipswich · Scenic Rim',
-    // H1 rendered in two lines, second line italic + amber for emotional weight
-    h1_line1: 'Same kit.',
-    h1_italic: 'Same crew.',
-    h1_line3: 'Same warranty.',
+    // H1 rendered in three lines, middle italic + amber for emotional weight.
+    // Copy lifted verbatim from his caption DX88FHQCcfk — pure brand voice.
+    h1_line1: 'Quality kit.',
+    h1_italic: 'Clean installs.',
+    h1_line3: 'Honest pricing.',
     subhead: 'Premium solar, air-con and electrical from the team behind 100kW off-grid and 21kW commercial installs. The same SolaX, GoodWe, LONGi and Jinko gear on your roof. Backed by our 10 Year Installation Warranty.',
     primary_cta: 'Get a free quote',
     secondary_cta: 'Call 0490 482 632',
