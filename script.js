@@ -163,8 +163,10 @@
       </details>
     `).join('');
 
-    // CTA banner — uses h2_html so we can italicise the emphasis word
-    byRole('cta-h').innerHTML = C.cta_banner.h2_html;
+    // CTA banner — sentence-per-line spans + italic emphasis preserved via <em>
+    byRole('cta-h').innerHTML = C.cta_banner.h2_sentences
+      .map(s => `<span class="sent sent--block"><span class="inner">${s}</span></span>`)
+      .join('');
     byRole('cta-sub').textContent = C.cta_banner.subhead;
     byRole('cta-primary').textContent = C.cta_banner.primary_cta;
     byRole('cta-secondary').textContent = C.cta_banner.secondary_cta;

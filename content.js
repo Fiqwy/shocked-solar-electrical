@@ -264,8 +264,12 @@ window.CONTENT = {
   },
 
   cta_banner: {
-    // h2_html supports <em> for italic-serif emphasis
-    h2_html: 'Right kit. Right install. Powered the <em>right way</em>.',
+    // Sentences rendered as separate <span class="sent sent--block"> for one-line-per-sentence layout
+    h2_sentences: [
+      'Right kit.',
+      'Right install.',
+      'Powered the <em>right way</em>.',
+    ],
     subhead: 'Get a free quote on solar, air-con or electrical. Brisbane and surrounds.',
     primary_cta: 'Get a free quote',
     secondary_cta: 'Call 0490 482 632',
