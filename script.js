@@ -181,12 +181,20 @@
     byRole('footer-credit').textContent = C.footer.credit;
   }
 
-  function setWordSpans(el, text) {
+  // Split an H2 by sentence boundary. Each sentence becomes its own line so
+  // multi-sentence H2s ("Three trades. One crew. One call.") read as three
+  // intentional lines instead of word-level animation orphans like "Three /
+  // trades.". Single-sentence H2s wrap naturally inside the container.
+  function setSentenceSpans(el, text) {
     if (!el || !text) return;
-    el.innerHTML = text.split(/\s+/).map(w =>
-      `<span class="word"><span class="inner">${w}</span></span>`
-    ).join(' ');
+    const parts = text.split(/(?<=[.!?])\s+/).map(s => s.trim()).filter(Boolean);
+    const multi = parts.length > 1;
+    el.innerHTML = parts.map(s =>
+      `<span class="sent${multi ? ' sent--block' : ''}"><span class="inner">${s}</span></span>`
+    ).join(multi ? '' : ' ');
   }
+  // Back-compat alias — old callers can still use setWordSpans.
+  const setWordSpans = setSentenceSpans;
 
   function iconSvg(key) {
     const icons = {
@@ -260,7 +268,7 @@
       gsap.set(inners, { y: '100%', opacity: 0 });
       window.ScrollTrigger.create({
         trigger: el, start: 'top 85%', once: true,
-        onEnter: () => gsap.to(inners, { y: '0%', opacity: 1, duration: 0.8, ease: 'expo.out', stagger: 0.03 }),
+        onEnter: () => gsap.to(inners, { y: '0%', opacity: 1, duration: 0.95, ease: 'expo.out', stagger: 0.12 }),
       });
     });
     // Card stagger inside pillars + work grids

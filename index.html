@@ -35,7 +35,8 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="vendor/leaflet.css" media="print" onload="this.media='all'">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A0A08'/%3E%3Cpath d='M37 8 L18 36 L29 36 L25 56 L46 26 L34 26 Z' fill='%23F0A800'/%3E%3C/svg%3E">
+<link rel="icon" type="image/jpeg" href="assets/logo/profile.jpg">
+<link rel="apple-touch-icon" href="assets/logo/profile.jpg">
 <link rel="canonical" href="https://fiqwy.github.io/shocked-solar-electrical/">
 
 <!-- Structured data: LocalBusiness -->
@@ -50,6 +51,7 @@
   "telephone": "+61490482632",
   "email": "shockedsolarelectrical@gmail.com",
   "image": "https://fiqwy.github.io/shocked-solar-electrical/assets/gallery/10-DQlR5EGkyhf.jpg",
+  "logo": "https://fiqwy.github.io/shocked-solar-electrical/assets/logo/profile.jpg",
   "priceRange": "$$",
   "areaServed": [
     {"@type": "City", "name": "Brisbane"},
@@ -82,9 +84,10 @@
 <header class="nav" role="banner" data-role="nav">
   <div class="nav-inner">
     <a class="nav-brand" href="#top" aria-label="Shocked Solar and Electrical, back to top">
-      <span class="nav-mark" aria-hidden="true">
-        <svg viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><path d="M37 8 L18 36 L29 36 L25 56 L46 26 L34 26 Z" fill="currentColor"></path></svg>
-      </span>
+      <picture class="nav-mark">
+        <source srcset="assets/logo/profile.webp" type="image/webp">
+        <img src="assets/logo/profile.jpg" alt="" width="48" height="48" loading="eager" decoding="async">
+      </picture>
       <span class="nav-wordmark">
         <span class="nav-word">Shocked</span>
         <span class="nav-word-sub">Solar &amp; Electrical</span>
@@ -386,9 +389,10 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a class="footer-mark" href="#top" aria-label="Back to top">
-          <span aria-hidden="true">
-            <svg viewBox="0 0 64 64" width="36" height="36" aria-hidden="true"><path d="M37 8 L18 36 L29 36 L25 56 L46 26 L34 26 Z" fill="currentColor"></path></svg>
-          </span>
+          <picture>
+            <source srcset="assets/logo/profile.webp" type="image/webp">
+            <img src="assets/logo/profile.jpg" alt="" width="64" height="64" loading="lazy" decoding="async">
+          </picture>
           <span>Shocked Solar &amp; Electrical</span>
         </a>
         <p class="footer-tag" data-role="footer-tag"></p>

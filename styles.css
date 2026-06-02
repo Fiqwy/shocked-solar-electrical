@@ -240,15 +240,15 @@ body {
 }
 .nav-brand { display: inline-flex; align-items: center; gap: 14px; }
 .nav-mark {
-  display: grid; place-items: center;
-  width: 38px; height: 38px;
-  background: var(--bg);
-  border: 1px solid var(--lines-strong);
-  border-radius: 9px;
-  color: var(--amber);
-  transition: border-color var(--t-fast) var(--ease-out), box-shadow var(--t-fast) var(--ease-out);
+  display: inline-grid; place-items: center;
+  width: 48px; height: 48px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: transform var(--t-fast) var(--ease-out), box-shadow var(--t-fast) var(--ease-out);
 }
-.nav-brand:hover .nav-mark { border-color: var(--amber); box-shadow: var(--glow-amber-soft); }
+.nav-mark img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.nav-brand:hover .nav-mark { transform: translateY(-1px); box-shadow: var(--glow-amber-soft); }
 .nav-wordmark { display: flex; flex-direction: column; line-height: 1; }
 .nav-word {
   font-family: 'Manrope', system-ui, sans-serif;
@@ -1229,14 +1229,17 @@ body {
 @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; } }
 @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; } }
 .footer-mark {
-  display: inline-flex; align-items: center; gap: 14px;
+  display: inline-flex; align-items: center; gap: 16px;
   font-family: 'Manrope', system-ui, sans-serif;
   font-weight: 800;
   font-size: 1.125rem;
   letter-spacing: -0.02em;
-  color: var(--amber);
-  margin-bottom: 20px;
+  color: var(--cream);
+  margin-bottom: 22px;
 }
+.footer-mark picture { display: inline-grid; width: 64px; height: 64px; border-radius: 12px; overflow: hidden; flex-shrink: 0; }
+.footer-mark img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.footer-mark:hover { color: var(--amber); }
 .footer-tag { color: var(--cream-muted); max-width: 34ch; font-size: 0.9375rem; line-height: 1.55; }
 .footer-h {
   font-family: 'Manrope', system-ui, sans-serif;
@@ -1298,6 +1301,15 @@ body {
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { opacity: 1 !important; transform: none !important; }
   .hero-h1 .hero-line { transform: none !important; opacity: 1 !important; }
+}
+
+/* H2 sentence-per-line reveal (replaces word-stagger that produced orphan wraps) */
+.sent { display: inline; }
+.sent--block { display: block; overflow: hidden; padding: 0.04em 0; }
+.sent .inner { display: inline-block; will-change: transform, opacity; }
+.sent--block .inner { display: block; }
+@media (prefers-reduced-motion: reduce) {
+  .sent .inner { transform: none !important; opacity: 1 !important; }
 }
 
 /* Divider */

@@ -47,7 +47,7 @@ window.CONTENT = {
   },
 
   suburb_result: {
-    success_template: (s) => `Yep, we cover ${s}. Lock in a free quote and we will lock in a time.`,
+    success_template: (s) => `Yep, we cover ${s}. Lock in a free quote and we'll lock in a time.`,
     success_cta: 'Get my free quote',
     softno_template: (s) => `${s} is outside our standard run, but we travel for the bigger jobs. Give us a ring.`,
     softno_cta: 'Call 0490 482 632',
@@ -240,7 +240,7 @@ window.CONTENT = {
     consent: 'By sending this you agree to be contacted about your quote. We will never share your details.',
     cta: 'Send to the team',
     success_h: 'Got it.',
-    success_body: "Cheers, the team will be in touch shortly. If it is urgent give us a bell on 0490 482 632.",
+    success_body: "Cheers, the team will be in touch shortly. If it’s urgent give us a bell on 0490 482 632.",
     error_body: "Couldn't send that one. Try again, or call us on 0490 482 632 and we'll sort it.",
   },
 
@@ -254,11 +254,11 @@ window.CONTENT = {
       { q: 'Do I really need a battery, or just panels?', a: 'Depends on your bills, your usage and whether you want the lights on when the grid goes down. We have done full whole-home backup with 50kWh SolaX and we have done panels-only where it made more sense. Honest advice on the quote, not a sales pitch.' },
       { q: 'What brands do you actually install?', a: 'SolaX, GoodWe, Jinko, LONGi, TCL and Sigenergy for solar and batteries. Schletter for racking. We pick the brand to suit the job, not the margin. Every panel and inverter we put up is a quality bankable brand with full Australian warranty support.' },
       { q: 'How do I know what size air-con I need?', a: 'Room size, ceiling height, insulation, window orientation and how many people use the space. The team measures on site and sizes the head properly. Undersized units run flat out and die early. Oversized ones short-cycle. We get it right the first time.' },
-      { q: 'Can you upgrade my switchboard at the same time as solar?', a: 'Often yes. On a lot of older homes you have to, because the existing board cannot safely handle a new inverter or battery. If that is the case we will flag it up front in the quote and arrange it. One crew, one visit, one cost. No surprises mid-install.' },
+      { q: 'Can you upgrade my switchboard at the same time as solar?', a: 'Often yes. On a lot of older homes you have to, because the existing board cannot safely handle a new inverter or battery. If that’s the case we’ll flag it up front in the quote and arrange it. One crew, one visit, one cost. No surprises mid-install.' },
       { q: 'How long does an install take?', a: 'A standard residential solar system is usually a one-day install once your STC paperwork, your retailer paperwork and our material order are sorted. Bigger jobs and battery installs can run two to three days. We give you a real timeline in the quote, not a guess.' },
       { q: 'What does the 10 Year Installation Warranty cover?', a: 'Everything the team installs. The full scope, exclusions and call-out terms are spelled out in the written quote you sign, alongside the separate manufacturer warranties on panels, inverters and batteries. We walk you through both at quote time, not after.' },
       { q: 'What areas do you actually cover?', a: 'Brisbane south, Logan, Ipswich east and Scenic Rim for everyday solar, air-con and electrical work. For larger commercial and off-grid jobs we travel further, including remote North Queensland. If you sit outside the standard run, ring us and we will talk it through.' },
-      { q: 'How quickly can you get out for a quote?', a: 'Call 0490 482 632 or send the form and we will lock in a time that suits. We will always give you a real answer on timing rather than a vague promise.' },
+      { q: 'How quickly can you get out for a quote?', a: 'Call 0490 482 632 or send the form and we’ll lock in a time that suits. We always give you a real answer on timing rather than a vague promise.' },
     ],
   },
 
