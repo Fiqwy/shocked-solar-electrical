@@ -12,7 +12,7 @@
   --amber-deep: #B27500;     /* shadow/depth */
   --cream: #F4F0E8;          /* warm cream primary text (Goldy-style) */
   --cream-muted: #B5AEA0;    /* warmer muted secondary */
-  --cream-subtle: #6E685D;   /* warmer subtle tertiary */
+  --cream-subtle: #8A8478;   /* warmer subtle tertiary */
   --bg: #0A0A08;             /* warm-tinted near-black (not pure black) */
   --surface: #131210;        /* warm-tinted surface */
   --surface-raised: #1A1916; /* card surface */
@@ -256,6 +256,10 @@ body {
 }
 .nav-mark img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .nav-brand:hover .nav-mark { transform: translateY(-1px); box-shadow: var(--glow-amber-soft); }
+.nav-logo { display: inline-flex; align-items: center; height: 40px; transition: transform var(--t-fast) var(--ease-out); }
+.nav-logo img { height: 40px; width: auto; display: block; }
+.nav-brand:hover .nav-logo { transform: translateY(-1px); }
+@media (max-width: 980px) { .nav-logo, .nav-logo img { height: 34px; } }
 .nav-wordmark { display: flex; flex-direction: column; line-height: 1; }
 .nav-word {
   font-family: 'IBM Plex Sans', system-ui, sans-serif;
@@ -550,11 +554,7 @@ body {
   z-index: 4;
   border-top: 1px solid var(--lines);
 }
-.hero-scroll-hint::after {
-  content: '— ' attr(data-after);
-  color: var(--cream-subtle);
-  letter-spacing: 0.22em;
-}
+/* (removed hero-scroll-hint::after — it injected an orphan em-dash) */
 .hero-scroll-line {
   display: inline-block;
   width: 60px; height: 1px;
@@ -877,6 +877,57 @@ body {
 }
 .work-tile.feature .work-tile-title { font-size: 2rem; }
 .work-tile-spec { font-size: 0.8125rem; color: var(--cream-muted); margin: 0; line-height: 1.45; }
+
+/* ============================================================
+   BRANDS & KIT
+   ============================================================ */
+.brands { background: var(--bg); border-top: 1px solid var(--lines); }
+.brands-footnote { font-size: 0.8125rem; color: var(--cream-subtle); margin: 26px 0 0; max-width: 64ch; line-height: 1.55; }
+
+/* (1) Logo ribbon — masked monochrome marks, seamless marquee */
+.brand-banner { overflow: hidden; margin: 6px 0 40px; border-block: 1px solid var(--lines); padding: 20px 0; -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
+.brand-banner-track { display: flex; align-items: center; gap: 52px; width: max-content; animation: marquee 52s linear infinite; }
+.brand-banner:hover .brand-banner-track { animation-play-state: paused; }
+.brand-banner-item { display: flex; align-items: center; flex-shrink: 0; }
+.brand-banner-mark { display: block; height: 22px; width: 120px; background: var(--cream); opacity: 0.5; -webkit-mask: var(--logo) center/contain no-repeat; mask: var(--logo) center/contain no-repeat; transition: background-color var(--t-fast) var(--ease-out), opacity var(--t-fast) var(--ease-out); }
+.brand-banner-item:hover .brand-banner-mark { background: var(--amber); opacity: 1; }
+.brand-banner-item--text { font-family: 'IBM Plex Sans', system-ui, sans-serif; font-weight: 800; font-size: 1.0625rem; letter-spacing: -0.01em; color: var(--cream-muted); opacity: 0.55; white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .brand-banner-track { animation: none; flex-wrap: wrap; justify-content: center; width: 100%; } }
+@media (max-width: 700px) { .brand-banner-track { gap: 36px; animation-duration: 38s; } .brand-banner-mark { height: 20px; width: 104px; } }
+
+/* (2) Segmented control — pill track with a sliding amber indicator */
+.brand-tabs { position: relative; display: inline-flex; gap: 2px; padding: 4px; margin: 0 0 28px; max-width: 100%; background: var(--surface-raised); border: 1px solid var(--lines); border-radius: 999px; }
+.brand-tab { position: relative; z-index: 1; flex-shrink: 0; padding: 9px 18px; border: 0; background: transparent; border-radius: 999px; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-weight: 600; font-size: 0.9375rem; letter-spacing: -0.01em; color: var(--cream-muted); white-space: nowrap; cursor: pointer; transition: color var(--t-fast) var(--ease-out); }
+.brand-tab:hover { color: var(--cream); }
+.brand-tab.is-active { color: var(--bg); }
+.brand-tab-indicator { position: absolute; z-index: 0; top: 4px; bottom: 4px; left: 0; width: var(--ind-w, 0); transform: translateX(var(--ind-x, 0)); background: var(--amber); border-radius: 999px; box-shadow: var(--glow-amber-soft); pointer-events: none; transition: transform var(--t-base) var(--ease-out), width var(--t-base) var(--ease-out); }
+@media (prefers-reduced-motion: reduce) { .brand-tab-indicator { transition: none; } }
+@media (max-width: 720px) { .brand-tabs { display: flex; overflow-x: auto; scrollbar-width: none; scroll-padding-inline: var(--gutter); padding-inline: var(--gutter); margin-inline: calc(-1 * var(--gutter)); -webkit-mask-image: linear-gradient(to right, #000 88%, transparent); mask-image: linear-gradient(to right, #000 88%, transparent); } .brand-tabs::-webkit-scrollbar { display: none; } }
+
+/* (3) Hairline-lattice wall — every mark normalised to one optical band */
+.brand-panel[hidden] { display: none; }
+.brand-panel.is-active { animation: fadeUp 360ms var(--ease-out) both; }
+@media (prefers-reduced-motion: reduce) { .brand-panel.is-active { animation: none; } }
+.brand-wall { display: grid; grid-template-columns: repeat(var(--cols, 4), minmax(170px, 240px)); gap: 1px; width: fit-content; max-width: 100%; margin-inline: auto; background: var(--lines); border: 1px solid var(--lines); border-radius: var(--radius-lg); overflow: hidden; }
+.brand-cell { display: grid; place-items: center; min-height: 96px; padding: clamp(20px, 3vw, 34px); background: var(--surface); transition: background-color var(--t-base) var(--ease-out), box-shadow var(--t-base) var(--ease-out); }
+@media (hover: hover) { .brand-cell:hover { background: var(--surface-raised); box-shadow: inset 0 0 0 1px var(--lines-amber), var(--glow-amber-soft); } }
+.brand-mark { display: block; height: var(--logo-h, 28px); width: 140px; max-width: 78%; background: var(--cream); opacity: 0.7; -webkit-mask: var(--logo) center/contain no-repeat; mask: var(--logo) center/contain no-repeat; transition: background-color var(--t-fast) var(--ease-out), opacity var(--t-fast) var(--ease-out), transform var(--t-base) var(--ease-out); }
+@media (hover: hover) { .brand-cell:hover .brand-mark { background: var(--amber); opacity: 1; transform: translateY(-2px); } }
+.brand-cell-word { font-family: 'IBM Plex Sans', system-ui, sans-serif; font-weight: 800; font-size: 1.0625rem; line-height: 28px; letter-spacing: -0.02em; color: var(--cream); opacity: 0.72; transition: color var(--t-fast) var(--ease-out), opacity var(--t-fast) var(--ease-out); }
+@media (hover: hover) { .brand-cell:hover .brand-cell-word { color: var(--amber); opacity: 1; } }
+.brand-wall-spec { margin: 18px 0 0; text-align: center; font-size: 0.75rem; color: var(--cream-subtle); letter-spacing: 0.04em; font-feature-settings: 'tnum' 1; }
+@media (max-width: 680px) { .brand-wall { grid-template-columns: repeat(2, minmax(0, 1fr)); width: auto; } }
+@media (max-width: 480px) { .brand-cell { min-height: 84px; padding: 18px; } .brand-mark { height: 20px; } .brand-cell-word { font-size: 1rem; line-height: 20px; } }
+
+/* (4) Verified credential chips — facts + real serials, not an official seal */
+.brand-creds { display: flex; flex-wrap: wrap; gap: 14px; margin: 36px 0 0; padding: 0; list-style: none; }
+.brand-cred { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: var(--surface-raised); border: 1px solid var(--lines-strong); border-radius: var(--radius); }
+.brand-cred-icon { flex-shrink: 0; display: grid; place-items: center; width: 32px; height: 32px; border-radius: var(--radius-sm); background: rgba(240, 168, 0, 0.12); border: 1px solid var(--lines-amber); color: var(--amber); }
+.brand-cred-text { display: flex; flex-direction: column; gap: 2px; line-height: 1.2; }
+.brand-cred-label { font-weight: 700; font-size: 0.9375rem; color: var(--cream); letter-spacing: -0.01em; }
+.brand-cred-meta { font-size: 0.75rem; color: var(--cream-subtle); }
+.brand-cred-id { margin-left: auto; padding-left: 14px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-feature-settings: 'tnum' 1, 'zero' 1; font-size: 0.8125rem; letter-spacing: 0.02em; color: var(--amber); }
+@media (max-width: 560px) { .brand-creds { flex-direction: column; align-items: stretch; } .brand-cred-id { margin-left: 0; padding-left: 0; } }
 
 /* ============================================================
    WHY SHOCKED — editorial split
@@ -1251,6 +1302,8 @@ body {
 }
 .footer-mark picture { display: inline-grid; width: 64px; height: 64px; border-radius: 12px; overflow: hidden; flex-shrink: 0; }
 .footer-mark img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.footer-mark .footer-logo { width: auto; height: auto; border-radius: 0; overflow: visible; }
+.footer-mark .footer-logo img { width: auto; height: 56px; object-fit: contain; }
 .footer-mark:hover { color: var(--amber); }
 .footer-tag { color: var(--cream-muted); max-width: 34ch; font-size: 0.9375rem; line-height: 1.55; }
 .footer-h {
@@ -1327,3 +1380,121 @@ body {
 /* Divider */
 .divider { display: block; width: 100%; height: 60px; color: var(--amber); opacity: 0.4; margin-top: 100px; filter: drop-shadow(0 0 8px currentColor); }
 .divider-volt path { stroke-linecap: round; stroke-linejoin: round; }
+
+/* ============================================================
+   PHASE 2 — product photos, service photos, process, offers,
+   callback, upgrade, slim call band
+   ============================================================ */
+
+/* Service photos on the three pillar cards */
+.pillar-photo-wrap { position: relative; margin: -38px -38px 26px; height: 200px; overflow: hidden; }
+.pillar-photo { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 700ms var(--ease-out); }
+.pillar-card:hover .pillar-photo { transform: scale(1.05); }
+.pillar-photo-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(19,18,16,0) 42%, rgba(19,18,16,0.92) 100%); }
+.pillar-photo-wrap .pillar-num {
+  position: absolute; left: 16px; bottom: 14px; margin: 0; z-index: 2;
+  padding: 5px 12px; border-radius: 999px;
+  background: rgba(10,10,8,0.72); border: 1px solid var(--lines-amber);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+}
+@media (max-width: 980px) { .pillar-photo-wrap { height: 220px; } }
+
+/* Callback mini-form */
+.callback { background: var(--surface); }
+.callback-card {
+  background: var(--surface-raised); border: 1px solid var(--lines); border-radius: var(--radius-xl);
+  padding: 40px 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+}
+.callback-card .section-h2 { font-size: var(--text-4xl); margin-bottom: 14px; }
+.callback-card .eyebrow { margin-bottom: 16px; }
+.callback-card .section-lead { font-size: var(--text-base); }
+.callback-form { display: flex; flex-direction: column; gap: 12px; }
+.callback-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.callback-form input, .callback-form select {
+  background: var(--bg); border: 1px solid var(--lines); border-radius: 10px;
+  padding: 14px 16px; font-size: 16px; color: var(--cream); width: 100%;
+  transition: border-color var(--t-fast) var(--ease-out), box-shadow var(--t-fast) var(--ease-out);
+}
+.callback-form input:focus, .callback-form select:focus { outline: none; border-color: var(--amber); box-shadow: var(--glow-amber-soft); }
+.callback-form input::placeholder { color: var(--cream-subtle); }
+.callback-form .btn { width: 100%; }
+.cb-honey { position: absolute; left: -9999px; opacity: 0; pointer-events: none; }
+.callback-result { font-size: 0.875rem; margin: 4px 0 0; line-height: 1.5; }
+.callback-result.ok { color: var(--success); }
+.callback-result.err { color: var(--cream); }
+.callback-result a { color: var(--amber); border-bottom: 1px solid currentColor; }
+@media (max-width: 860px) { .callback-card { grid-template-columns: 1fr; gap: 26px; padding: 32px 26px; } }
+@media (max-width: 520px) { .callback-row { grid-template-columns: 1fr; } }
+
+/* Upgrade your existing system */
+.upgrade { background: var(--bg); }
+.upgrade-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+@media (max-width: 900px) { .upgrade-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .upgrade-grid { grid-template-columns: 1fr; } }
+.upgrade-item {
+  background: var(--surface); border: 1px solid var(--lines); border-radius: var(--radius);
+  padding: 26px 26px 28px 30px; position: relative;
+  transition: border-color var(--t-base) var(--ease-out), transform var(--t-base) var(--ease-out);
+}
+.upgrade-item::before { content: ''; position: absolute; left: 0; top: 26px; bottom: 26px; width: 3px; border-radius: 2px; background: var(--amber); box-shadow: 0 0 12px var(--amber); }
+@media (hover: hover) { .upgrade-item:hover { border-color: var(--lines-amber); transform: translateY(-3px); } }
+.upgrade-item-title { font-family: 'IBM Plex Sans', system-ui, sans-serif; font-weight: 700; font-size: 1.0625rem; color: var(--cream); margin: 0 0 8px; letter-spacing: -0.01em; }
+.upgrade-item-body { font-size: 0.875rem; color: var(--cream-muted); margin: 0; line-height: 1.55; }
+.upgrade-cta { margin-top: 32px; }
+
+/* Offers / incentives */
+.incentives { background: var(--surface); }
+.incentives-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+@media (max-width: 860px) { .incentives-grid { grid-template-columns: 1fr; } }
+.incentive-tile {
+  background: var(--surface-raised); border: 1px solid var(--lines); border-radius: var(--radius-lg);
+  padding: 32px 30px; position: relative; overflow: hidden; isolation: isolate;
+}
+.incentive-tile::before { content: ''; position: absolute; top: -30%; right: -15%; width: 220px; height: 220px; background: radial-gradient(circle, rgba(240,168,0,0.14), transparent 60%); filter: blur(34px); z-index: 0; }
+.incentive-name { position: relative; z-index: 1; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-weight: 800; font-size: 1.1875rem; letter-spacing: -0.02em; color: var(--amber); margin: 0 0 12px; }
+.incentive-body { position: relative; z-index: 1; font-size: 0.9375rem; color: var(--cream-muted); margin: 0; line-height: 1.6; }
+.incentives-warranty {
+  margin-top: 20px; display: flex; align-items: center; justify-content: space-between; gap: 28px;
+  background: linear-gradient(120deg, rgba(240,168,0,0.10), rgba(240,168,0,0.02));
+  border: 1px solid var(--lines-amber); border-radius: var(--radius-lg); padding: 30px 34px;
+}
+.incentives-warranty-copy h3 { font-family: 'IBM Plex Sans', system-ui, sans-serif; font-weight: 800; font-size: 1.375rem; letter-spacing: -0.02em; color: var(--cream); margin: 0 0 8px; }
+.incentives-warranty-copy p { font-size: 0.9375rem; color: var(--cream-muted); margin: 0; line-height: 1.6; max-width: 70ch; }
+.incentives-warranty .btn { flex-shrink: 0; }
+.incentives-finance { margin: 22px 0 0; font-size: 0.9375rem; color: var(--cream); font-weight: 600; }
+.incentives-disclaimer { margin-top: 12px; max-width: 72ch; }
+@media (max-width: 760px) { .incentives-warranty { flex-direction: column; align-items: flex-start; gap: 18px; padding: 26px 24px; } .incentives-warranty .btn { width: 100%; } }
+
+/* Slim call band */
+.call-band { background: var(--bg); border-top: 1px solid var(--lines); border-bottom: 1px solid var(--lines); padding: 40px 0; }
+.call-band-inner { display: flex; align-items: center; justify-content: space-between; gap: 28px; flex-wrap: wrap; }
+.call-band-line { font-family: 'IBM Plex Sans', system-ui, sans-serif; font-weight: 800; font-size: var(--text-2xl); letter-spacing: -0.02em; color: var(--cream); margin: 0; }
+.call-band-sub { font-size: 0.9375rem; color: var(--cream-muted); margin: 6px 0 0; }
+@media (max-width: 600px) { .call-band-inner { flex-direction: column; align-items: flex-start; } .call-band-inner .btn { width: 100%; } }
+
+/* Our process */
+.process { background: var(--bg); }
+.process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+@media (max-width: 900px) { .process-steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .process-steps { grid-template-columns: 1fr; } }
+.process-step {
+  background: var(--surface); border: 1px solid var(--lines); border-radius: var(--radius-lg);
+  padding: 32px 28px 30px; position: relative;
+  transition: border-color var(--t-base) var(--ease-out), transform var(--t-base) var(--ease-out);
+}
+@media (hover: hover) { .process-step:hover { border-color: var(--lines-amber); transform: translateY(-4px); } }
+.process-step-num {
+  display: block; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 500;
+  font-size: 0.8125rem; letter-spacing: 0.08em; color: var(--amber); margin-bottom: 18px;
+  font-feature-settings: 'tnum' 1, 'zero' 1; padding-bottom: 14px; border-bottom: 1px solid var(--lines);
+}
+.process-step-title { font-family: 'IBM Plex Sans', system-ui, sans-serif; font-weight: 700; font-size: 1.125rem; letter-spacing: -0.015em; color: var(--cream); margin: 0 0 10px; line-height: 1.15; }
+.process-step-body { font-size: 0.875rem; color: var(--cream-muted); margin: 0; line-height: 1.6; }
+
+/* Quote SLA line */
+.quote-sla { text-align: center; font-size: 0.875rem; color: var(--amber); font-weight: 600; margin: 14px 0 0; }
+
+/* Nav Instagram link */
+.nav-ig { display: inline-flex; align-items: center; color: var(--cream-muted); transition: color var(--t-fast) var(--ease-out); }
+.nav-ig:hover { color: var(--amber); }
+@media (max-width: 980px) { .nav-ig { display: none; } }

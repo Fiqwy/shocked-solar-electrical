@@ -34,6 +34,8 @@
     initCountUps();
     initLeafletMap();
     initQuoteForm();
+    initCallbackForm();
+    initBrandExplorer();
     initFaqEnhance();
     initDividerDraw();
     document.body.classList.remove('is-loading');
@@ -111,6 +113,92 @@
       </article>
     `).join('');
 
+    // Brands & kit — "The Wall of Kit": logo ribbon + category explorer + verified credentials
+    byRole('brands-eyebrow').textContent = C.brands.eyebrow;
+    setWordSpans(byRole('brands-h'), C.brands.h2);
+    byRole('brands-lead').textContent = C.brands.lead;
+    byRole('brands-footnote').textContent = C.brands.footnote;
+    // (A) Logo ribbon — unique brand set (dedupe by name), mask span for sourced logos, wordmark fallback.
+    const _seen = new Set();
+    const _uniqueBrands = C.brands.groups.flatMap(g => g.items).filter(it => { if (_seen.has(it.brand)) return false; _seen.add(it.brand); return true; });
+    const bannerItem = (it) => it.logo
+      ? `<span class="brand-banner-item"><span class="brand-banner-mark" style="--logo:url('${it.logo}')"></span></span>`
+      : `<span class="brand-banner-item brand-banner-item--text">${it.brand}</span>`;
+    const _bannerHtml = _uniqueBrands.map(bannerItem).join('');
+    byRole('brand-banner').innerHTML = reduced ? _bannerHtml : _bannerHtml + _bannerHtml; // 2x = seamless -50% loop
+    // (B) Wall cells — monochrome mask logo (cream -> amber on hover) or styled wordmark fallback.
+    const brandMark = (it) => it.logo
+      ? `<span class="brand-mark" role="img" aria-label="${it.brand}" style="--logo:url('${it.logo}')${it.lh ? `;--logo-h:${it.lh}px` : ''}"></span>`
+      : `<span class="brand-cell-word">${it.brand}</span>`;
+    const brandCell = (it) => `<div class="brand-cell">${brandMark(it)}</div>`;
+    byRole('brand-tabs').innerHTML = C.brands.groups.map((g, i) => `
+      <button class="brand-tab${i === 0 ? ' is-active' : ''}" role="tab" id="brand-tab-${g.key}" aria-controls="brand-panel-${g.key}" aria-selected="${i === 0}" tabindex="${i === 0 ? '0' : '-1'}" data-key="${g.key}">${g.category}</button>
+    `).join('');
+    // (C) Panels — hairline-lattice wall + one Plex Mono spec caption per category.
+    byRole('brand-panels').innerHTML = C.brands.groups.map((g, i) => {
+      const cols = Math.min(g.items.length, 4); // wall hugs its content; sparse categories stay tight + centred
+      const spec = g.items.map(it => it.product).join(' · '); // spec-sheet line: the kit, not a repeat of the logos
+      return `
+      <div class="brand-panel${i === 0 ? ' is-active' : ''}" role="tabpanel" id="brand-panel-${g.key}" aria-labelledby="brand-tab-${g.key}" tabindex="-1"${i === 0 ? '' : ' hidden'}>
+        <div class="brand-wall" style="--cols:${cols}">${g.items.map(brandCell).join('')}</div>
+        <p class="brand-wall-spec mono-num">${spec}</p>
+      </div>`;
+    }).join('');
+    // (D) Verified credentials — promotes SAA accreditation + licence numbers already in content.
+    const _TICK = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+    const _creds = byRole('brand-creds');
+    if (_creds && C.brands.creds) _creds.innerHTML = C.brands.creds.map(c => `
+      <li class="brand-cred">
+        <span class="brand-cred-icon" aria-hidden="true">${_TICK}</span>
+        <span class="brand-cred-text"><span class="brand-cred-label">${c.label}</span><span class="brand-cred-meta">${c.meta}</span></span>
+        <span class="brand-cred-id" aria-label="Reference ${c.id.split('').join(' ')}">${c.id}</span>
+      </li>`).join('');
+
+    // Callback mini-form
+    byRole('callback-eyebrow').textContent = C.callback.eyebrow;
+    setWordSpans(byRole('callback-h'), C.callback.h2);
+    byRole('callback-lead').textContent = C.callback.lead;
+    byRole('cb-name').placeholder = C.callback.name_ph;
+    byRole('cb-phone').placeholder = C.callback.phone_ph;
+    byRole('cb-cta').textContent = C.callback.cta;
+    byRole('cb-service').innerHTML = `<option value="" disabled selected>${C.callback.service_label}</option>` + C.callback.services.map(s => `<option value="${s}">${s}</option>`).join('');
+
+    // Upgrade existing system
+    byRole('upgrade-eyebrow').textContent = C.upgrade.eyebrow;
+    setWordSpans(byRole('upgrade-h'), C.upgrade.h2);
+    byRole('upgrade-lead').textContent = C.upgrade.lead;
+    byRole('upgrade-cta').textContent = C.upgrade.cta;
+    byRole('upgrade-grid').innerHTML = C.upgrade.items.map(it => `
+      <article class="upgrade-item" data-reveal="fade-up">
+        <h3 class="upgrade-item-title">${it.title}</h3>
+        <p class="upgrade-item-body">${it.body}</p>
+      </article>`).join('');
+
+    // Incentives / offers
+    byRole('incentives-eyebrow').textContent = C.incentives.eyebrow;
+    setWordSpans(byRole('incentives-h'), C.incentives.h2);
+    byRole('incentives-lead').textContent = C.incentives.lead;
+    byRole('incentives-tiles').innerHTML = C.incentives.tiles.map(t => `
+      <article class="incentive-tile" data-reveal="fade-up">
+        <h3 class="incentive-name">${t.name}</h3>
+        <p class="incentive-body">${t.body}</p>
+      </article>`).join('');
+    byRole('incentives-warranty-h').textContent = C.incentives.warranty_h;
+    byRole('incentives-warranty-body').textContent = C.incentives.warranty_body;
+    byRole('incentives-finance').textContent = C.incentives.finance_line;
+    byRole('incentives-disclaimer').textContent = C.incentives.disclaimer;
+
+    // Our process
+    byRole('process-eyebrow').textContent = C.process.eyebrow;
+    setWordSpans(byRole('process-h'), C.process.h2);
+    byRole('process-lead').textContent = C.process.lead;
+    byRole('process-steps').innerHTML = C.process.steps.map(s => `
+      <article class="process-step" data-reveal="fade-up">
+        <span class="process-step-num">${s.num}</span>
+        <h3 class="process-step-title">${s.title}</h3>
+        <p class="process-step-body">${s.body}</p>
+      </article>`).join('');
+
     // Why Shocked
     byRole('why-eyebrow').textContent = C.why_shocked.eyebrow;
     setWordSpans(byRole('why-h'), C.why_shocked.h2);
@@ -151,6 +239,9 @@
     `).join('');
     byRole('quote-success-h').textContent = C.quote.success_h;
     byRole('quote-success-body').textContent = C.quote.success_body;
+    byRole('quote-sla').textContent = C.quote.sla;
+    byRole('q-referral-label').textContent = C.quote.fields.referral_label;
+    byRole('q-referral').innerHTML = `<option value="">Select an option</option>` + C.quote.fields.referrals.map(r => `<option value="${r}">${r}</option>`).join('');
 
     // FAQ
     byRole('faq-eyebrow').textContent = C.faq.eyebrow;
@@ -162,6 +253,19 @@
         <div class="faq-answer">${it.a}</div>
       </details>
     `).join('');
+    // FAQ structured data (FAQPage) — built from the same content so it never drifts
+    const faqLd = byRole('faq-jsonld');
+    if (faqLd) {
+      faqLd.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: C.faq.items.map(it => ({
+          '@type': 'Question',
+          name: it.q,
+          acceptedAnswer: { '@type': 'Answer', text: it.a },
+        })),
+      });
+    }
 
     // CTA banner — sentence-per-line spans + italic emphasis preserved via <em>
     byRole('cta-h').innerHTML = C.cta_banner.h2_sentences
@@ -224,8 +328,12 @@
     window.gsap.ticker.lagSmoothing(0);
     if (window.ScrollTrigger) {
       lenis.on('scroll', window.ScrollTrigger.update);
-      window.addEventListener('load', () => window.ScrollTrigger.refresh());
     }
+    // Re-measure after fonts/images settle so Lenis' scroll limit isn't capped short on a tall page.
+    const remeasure = () => { if (lenis) lenis.resize(); if (window.ScrollTrigger) window.ScrollTrigger.refresh(); };
+    window.addEventListener('load', remeasure);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(remeasure);
+    setTimeout(remeasure, 1200);
   }
 
   /* ---------- Reveal animations ---------- */
@@ -257,7 +365,7 @@
       if (el.closest('.hero')) return;
       // Skip children that are inside a grid handled by the parent stagger below,
       // otherwise a double gsap.from() leaves them stuck at opacity:0 forever.
-      if (el.parentElement && (el.parentElement.classList.contains('work-grid') || el.parentElement.classList.contains('pillars-grid'))) return;
+      if (el.parentElement && (el.parentElement.classList.contains('work-grid') || el.parentElement.classList.contains('pillars-grid') || el.parentElement.classList.contains('upgrade-grid') || el.parentElement.classList.contains('incentives-grid') || el.parentElement.classList.contains('process-steps'))) return;
       gsap.from(el, {
         y: 32, opacity: 0, duration: 0.9, ease: 'expo.out',
         scrollTrigger: { trigger: el, start: 'top 85%', once: true },
@@ -274,7 +382,7 @@
       });
     });
     // Card stagger inside pillars + work grids
-    $$('.pillars-grid, .work-grid').forEach(grid => {
+    $$('.pillars-grid, .work-grid, .upgrade-grid, .incentives-grid, .process-steps').forEach(grid => {
       const cards = grid.children;
       window.ScrollTrigger.create({
         trigger: grid, start: 'top 80%', once: true,
@@ -620,15 +728,7 @@
         const quote = document.getElementById('quote');
         if (quote) (lenis ? lenis.scrollTo(quote, { offset: -72 }) : quote.scrollIntoView({ behavior: 'smooth' }));
       });
-      // Auto-glide qualified leads down to the form after a beat so they don't
-      // have to find the next step themselves.
-      if (inList) {
-        setTimeout(() => {
-          const quote = document.getElementById('quote');
-          if (quote && lenis) lenis.scrollTo(quote, { offset: -72 });
-          else if (quote) quote.scrollIntoView({ behavior: 'smooth' });
-        }, 1100);
-      }
+      // (Removed the auto-glide to the form so engaged visitors browse the proof first.)
     }
 
     input.addEventListener('input', () => {
@@ -714,7 +814,10 @@
       const kW = parseFloat(slider.value);
       slider.style.setProperty('--fillPct', `${((kW - 3) / (20 - 3)) * 100}%`);
       const self = K.SELF_CONSUMP[battery];
-      const annual = kW * K.PEAK_SUN_HRS * 365 * (self * K.TARIFF_KWH + (1 - self) * K.FEED_IN);
+      const gen = kW * K.PEAK_SUN_HRS * 365;
+      // You cannot self-consume more power than the home actually uses; the surplus only earns the feed-in.
+      const selfUse = Math.min(gen * self, K.HOME_USAGE_KWH);
+      const annual = selfUse * K.TARIFF_KWH + (gen - selfUse) * K.FEED_IN;
       const total25 = annual * 25 * K.DEGRADATION_25YR;
       const installCost = K.INSTALL_COST_PER_KW * kW + K.BATTERY_COST[battery] - K.STC_PER_KW * kW - K.BATTERY_REBATE[battery];
       const payback = annual > 0 ? installCost / annual : 0;
@@ -722,8 +825,7 @@
       animateNumber(out1, displayedAnnual, annual, v => auFmt.format(v), () => displayedAnnual = annual);
       animateNumber(out2, displayedTotal, total25, v => auFmt.format(v), () => displayedTotal = total25);
       out3.textContent = `${payback.toFixed(1)} years`;
-      if (firstInteraction === false && disclaimer.hidden) disclaimer.hidden = false;
-      firstInteraction = false;
+      if (disclaimer && disclaimer.hidden) disclaimer.hidden = false;
     }
     function animateNumber(el, from, to, fmt, done) {
       if (reduced) { el.textContent = fmt(to); done(); return; }
@@ -865,10 +967,12 @@
 
       // Cluster markers with PERMANENT name labels — proper area pins
       const clusters = [
-        { name: 'Brisbane south', lat: -27.555, lng: 153.060 },
-        { name: 'Logan',          lat: -27.660, lng: 153.090 },
-        { name: 'Ipswich east',   lat: -27.640, lng: 152.840 },
-        { name: 'Scenic Rim',     lat: -27.875, lng: 152.990 },
+        { name: 'Moreton Bay & Redcliffe', lat: -27.230, lng: 153.090 },
+        { name: 'Brisbane south',          lat: -27.555, lng: 153.060 },
+        { name: 'Logan',                   lat: -27.660, lng: 153.090 },
+        { name: 'Ipswich',                 lat: -27.620, lng: 152.760 },
+        { name: 'Scenic Rim',              lat: -27.960, lng: 152.990 },
+        { name: 'Gold Coast & Tweed',      lat: -28.080, lng: 153.430 },
       ];
       clusters.forEach(c => {
         const pin = L.divIcon({
@@ -886,16 +990,21 @@
 
       // Service area polygon — traced through actual outer suburb perimeter
       const serviceArea = [
-        [-27.395, 152.760],  // NW (Ipswich north)
-        [-27.430, 153.040],  // N (Brisbane north fringe)
-        [-27.460, 153.200],  // NE (Wynnum / coast)
-        [-27.720, 153.300],  // E (Beenleigh / Eagleby coast)
-        [-27.910, 153.260],  // SE (Coomera fringe)
-        [-28.020, 153.040],  // S (Tamborine / Wongawallan)
-        [-28.000, 152.870],  // SW (Scenic Rim south)
-        [-27.870, 152.680],  // W (Ipswich south)
+        [-27.180, 153.060],  // N (Redcliffe peninsula tip)
+        [-27.230, 153.115],  // NE (Redcliffe / Margate coast)
+        [-27.330, 153.190],  // E (Sandgate / Brighton coast)
+        [-27.470, 153.220],  // E (Wynnum bayside)
+        [-27.720, 153.310],  // E (Redland / Beenleigh coast edge)
+        [-27.940, 153.430],  // SE (Southport / Gold Coast coast)
+        [-28.080, 153.470],  // SE (Burleigh / Palm Beach coast)
+        [-28.185, 153.555],  // S (Tweed Heads / Coolangatta, NSW)
+        [-28.230, 153.390],  // S (Tweed hinterland, NSW)
+        [-28.060, 153.150],  // SW (Tamborine / Canungra)
+        [-28.010, 152.870],  // SW (Scenic Rim south)
+        [-27.870, 152.700],  // W (Ipswich south)
         [-27.640, 152.620],  // W (Ipswich west)
-        [-27.500, 152.680],  // NW (back toward Ipswich)
+        [-27.480, 152.700],  // NW (Ipswich north)
+        [-27.300, 152.900],  // NW (Caboolture / Moreton Bay west)
       ];
       L.polygon(serviceArea, {
         color: '#F0A800',
@@ -954,7 +1063,7 @@
       const v = form[name].value.trim();
       if (name === 'name')  return v.length < 2 ? 'Your name please.' : '';
       if (name === 'phone') return ((v.match(/\d/g) || []).length < 8) ? 'Looks short. Number please.' : '';
-      if (name === 'email') return !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v) ? 'Real email please.' : '';
+      if (name === 'email') return (v && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) ? 'Real email please.' : '';
       return '';
     }
     function validate(forceAll) {
@@ -998,7 +1107,7 @@
       // === FORM DELIVERY ===
       // Web3Forms primary (https://web3forms.com). If WEB3FORMS_KEY is the
       // placeholder OR the fetch fails, fall back to a mailto: so the lead
-      // STILL reaches Brendan, with phone number prominent in the success
+      // STILL reaches the team, with phone number prominent in the success
       // copy. No silent lead loss.
       const WEB3FORMS_KEY = 'REPLACE_WITH_REAL_WEB3FORMS_ACCESS_KEY';
       const FALLBACK_EMAIL = 'shockedsolarelectrical@gmail.com';
@@ -1045,6 +1154,102 @@
       if (window.gsap && !reduced) window.gsap.from(success, { y: 16, opacity: 0, duration: 0.5, ease: 'expo.out' });
       submit.classList.remove('is-loading');
       submit.disabled = false;
+    });
+  }
+
+  /* ---------- Brand explorer (segmented control -> hairline-lattice wall) ---------- */
+  function initBrandExplorer() {
+    const tabs = $$('.brand-tab');
+    const panels = $$('.brand-panel');
+    if (!tabs.length) return;
+    const bar = tabs[0].parentElement;
+    let indicator = bar.querySelector('.brand-tab-indicator');
+    if (!indicator) {
+      indicator = document.createElement('span');
+      indicator.className = 'brand-tab-indicator';
+      indicator.setAttribute('aria-hidden', 'true');
+      bar.appendChild(indicator);
+    }
+    function moveIndicator() {
+      const a = tabs.find(t => t.classList.contains('is-active')) || tabs[0];
+      bar.style.setProperty('--ind-x', a.offsetLeft + 'px');
+      bar.style.setProperty('--ind-w', a.offsetWidth + 'px');
+    }
+    function activate(key, focusTab) {
+      tabs.forEach(t => {
+        const on = t.dataset.key === key;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        if (on && focusTab) { t.focus(); t.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: reduced ? 'auto' : 'smooth' }); }
+      });
+      panels.forEach(p => {
+        const on = p.id === `brand-panel-${key}`;
+        p.classList.toggle('is-active', on);
+        p.hidden = !on;
+      });
+      moveIndicator();
+    }
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => activate(t.dataset.key));
+      t.addEventListener('keydown', (e) => {
+        const map = { ArrowRight: 1, ArrowLeft: -1, Home: 'first', End: 'last' };
+        if (!(e.key in map)) return;
+        e.preventDefault();
+        let next;
+        if (e.key === 'Home') next = tabs[0];
+        else if (e.key === 'End') next = tabs[tabs.length - 1];
+        else next = tabs[(i + map[e.key] + tabs.length) % tabs.length];
+        activate(next.dataset.key, true);
+      });
+    });
+    moveIndicator();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveIndicator);
+    let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(moveIndicator, 120); });
+  }
+
+  /* ---------- Callback mini-form (reuses Web3Forms-or-mailto delivery) ---------- */
+  function initCallbackForm() {
+    const form = byRole('callback-form');
+    if (!form) return;
+    const result = byRole('callback-result');
+    const btn = form.querySelector('button[type="submit"]');
+    function show(cls, html) { result.hidden = false; result.className = 'callback-result ' + cls; result.innerHTML = html; }
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (form.website.value) return; // honeypot
+      const name = form.name.value.trim();
+      const phone = form.phone.value.trim();
+      const service = form.service.value || 'Not specified';
+      if (name.length < 2 || (phone.match(/\d/g) || []).length < 8) {
+        show('err', 'Pop in your name and a real number and we will call you back.');
+        return;
+      }
+      btn.disabled = true;
+      const WEB3FORMS_KEY = 'REPLACE_WITH_REAL_WEB3FORMS_ACCESS_KEY';
+      const FALLBACK_EMAIL = 'shockedsolarelectrical@gmail.com';
+      let delivered = false;
+      try {
+        if (WEB3FORMS_KEY && !WEB3FORMS_KEY.startsWith('REPLACE_')) {
+          const fd = new FormData();
+          fd.append('access_key', WEB3FORMS_KEY);
+          fd.append('subject', `Callback request — ${name}`);
+          fd.append('from_name', 'Shocked Solar Website');
+          fd.append('name', name); fd.append('phone', phone); fd.append('service', service);
+          const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
+          delivered = res.ok;
+        }
+      } catch (_) { delivered = false; }
+      if (delivered) {
+        show('ok', C.callback.success);
+        form.querySelectorAll('input, select, button').forEach(el => el.disabled = true);
+      } else {
+        // No silent lead loss: surface a working mailto + phone, never a fake success.
+        const body = `Callback request%0D%0AName: ${encodeURIComponent(name)}%0D%0APhone: ${encodeURIComponent(phone)}%0D%0AAbout: ${encodeURIComponent(service)}`;
+        const mailto = `mailto:${FALLBACK_EMAIL}?subject=${encodeURIComponent('Callback request — ' + name)}&body=${body}`;
+        show('err', `Nearly there. <a href="${mailto}">Tap to send your callback request</a>, or ring <a href="tel:0490482632">0490 482 632</a>.`);
+        btn.disabled = false;
+      }
     });
   }
 
