@@ -270,10 +270,11 @@ window.CONTENT = {
         { brand: 'Schletter', product: 'Wind-rated mounting', logo: '' },
         { brand: 'Clenergy', product: 'Rail mounting systems', logo: '' },
         { brand: 'Antai', product: 'Mounting systems', logo: '' },
+        { brand: 'PowerWave', product: 'Roof mounting', logo: '' },
       ]},
       { key: 'aircon', category: 'Air-conditioning', items: [
         { brand: 'Mitsubishi', product: 'Split systems', logo: 'assets/brands/mitsubishi.svg', lh: 24 },
-        { brand: 'Daikin', product: 'Split + ducted', logo: 'assets/brands/daikin.svg', lh: 22 },
+        { brand: 'Daikin', product: 'Split + multi-head', logo: 'assets/brands/daikin.svg', lh: 22 },
       ]},
       { key: 'electrical', category: 'General electrical', items: [
         { brand: 'Clipsal', product: 'Switches + power points', logo: '' },
@@ -368,7 +369,7 @@ window.CONTENT = {
       { q: 'Do I really need a battery, or just panels?', a: 'Depends on your bills, your usage and whether you want the lights on when the grid goes down. We have done full whole-home backup with 50kWh SolaX, and we have done panels-only where it made more sense. Honest advice on the quote, not a sales pitch.' },
       { q: 'What does the 10 Year Installation Warranty cover?', a: 'Everything the team installs. The full scope, exclusions and call-out terms are spelled out in the written quote you sign, alongside the separate manufacturer warranties on panels, inverters and batteries. We walk you through both at quote time, not after.' },
       { q: 'Are you accredited and licensed?', a: 'Yes. We are accredited with Solar Accreditation Australia (SAA S4689636), the body that now accredits solar installers across Australia, and we hold electrical contractor licence 1508323. Every install is done to those standards.' },
-      { q: 'What brands do you install?', a: 'A big range across all three trades: LONGi, Trina, TCL and Jinko panels; SolaX, GoodWe, Sungrow and Sigenergy inverters; SolaX and Sigenergy batteries; Schletter, Clenergy and Antai racking; Mitsubishi and Daikin air-con; and Clipsal, Schneider, Legrand and Atom electrical. Tap through them in the kit section above.' },
+      { q: 'What brands do you install?', a: 'A big range across all three trades: LONGi, Trina, TCL and Jinko panels; SolaX, GoodWe, Sungrow and Sigenergy inverters; SolaX and Sigenergy batteries; Schletter, Clenergy, Antai and PowerWave racking; Mitsubishi and Daikin air-con; and Clipsal, Schneider, Legrand and Atom electrical. Tap through them in the kit section above.' },
       { q: 'How do you choose which brand for my job?', a: 'We match the kit to your roof, your budget and how you actually use power, not to whatever is sitting in the shed. Premium gear where it earns its keep, solid value where it makes sense, and we tell you straight which way we would go and why. The exact make and model, and the reason for it, is spelled out on your written quote before you sign a thing.' },
       { q: 'Can you do off-grid or remote properties?', a: 'Yes. The team has delivered a 100kW off-grid system on a remote North Queensland property with 96kWh of battery storage. Big or small, on-grid or off, we can design for it.' },
       { q: 'Can you upgrade my switchboard at the same time as solar?', a: 'Often yes. On a lot of older homes you have to, because the existing board cannot safely handle a new inverter or battery. If that is the case we flag it up front in the quote and arrange it. One crew, one visit, one cost. No surprises mid-install.' },
