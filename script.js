@@ -29,6 +29,7 @@
     initSuburbCheck($('#hero-suburb-input'), byRole('hero-suburb-listbox'), byRole('hero-suburb-result'), 'hero');
     initTrustStripMarquee();
     initPillarsSpotlight();
+    initPillarBodyAlign();
     initSavingsCalc();
     initWorkGrid();
     initCountUps();
@@ -51,12 +52,10 @@
     byRole('nav-cta').firstElementChild.textContent = C.nav.cta;
     byRole('mobile-call-label').textContent = C.mobile_call_bar.label;
 
-    // Hero — editorial / photo-led
-    byRole('hero-eyebrow').textContent = C.hero.eyebrow;
+    // Hero - editorial / photo-led
     byRole('hero-h1-l1').textContent = C.hero.h1_line1;
     byRole('hero-h1-italic').textContent = C.hero.h1_italic;
     byRole('hero-h1-l3').textContent = C.hero.h1_line3;
-    byRole('hero-subhead').textContent = C.hero.subhead;
     byRole('hero-primary-cta').textContent = C.hero.primary_cta;
     byRole('hero-secondary-cta').textContent = C.hero.secondary_cta;
     byRole('hero-scroll-hint').textContent = C.hero.scroll_hint;
@@ -69,7 +68,7 @@
 
     // Three pillars
     byRole('pillars-eyebrow').textContent = C.three_pillars.eyebrow;
-    setWordSpans(byRole('pillars-h'), C.three_pillars.h2);
+    byRole('pillars-h').textContent = C.three_pillars.h2;
     $('[data-role="pillars-h"] ~ *, .three-pillars .section-lead, [data-role="pillars-lead"]'); // no-op
     byRole('pillars-lead').textContent = C.three_pillars.lead;
     byRole('pillars-grid').innerHTML = C.three_pillars.cards.map((card, i) => `
@@ -97,26 +96,18 @@
       <button type="button" role="radio" aria-checked="${i === 0}" data-batt="${i === 0 ? '0' : (i === 1 ? '13.5' : '27')}">${opt}</button>
     `).join('');
 
-    // Recent work
+    // Recent work — bare portrait photos, no text overlay
     byRole('work-eyebrow').textContent = C.recent_work.eyebrow;
     setWordSpans(byRole('work-h'), C.recent_work.h2);
-    byRole('work-lead').textContent = C.recent_work.lead;
     byRole('work-grid').innerHTML = C.recent_work.tiles.map((t, i) => `
       <article class="work-tile${t.feature ? ' feature' : ''}" data-idx="${i}" data-reveal="fade-up">
         <img src="${t.photo}" alt="${t.alt}" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async">
-        <div class="work-tile-overlay" aria-hidden="true"></div>
-        <div class="work-tile-meta">
-          <span class="work-tile-chip">${t.chip}</span>
-          <h3 class="work-tile-title">${t.title}</h3>
-          <p class="work-tile-spec">${t.spec}</p>
-        </div>
       </article>
     `).join('');
 
     // Brands & kit — "The Wall of Kit": logo ribbon + category explorer + verified credentials
     byRole('brands-eyebrow').textContent = C.brands.eyebrow;
     setWordSpans(byRole('brands-h'), C.brands.h2);
-    byRole('brands-lead').textContent = C.brands.lead;
     byRole('brands-footnote').textContent = C.brands.footnote;
     // (A) Logo ribbon — unique brand set (dedupe by name), mask span for sourced logos, wordmark fallback.
     const _seen = new Set();
@@ -137,11 +128,9 @@
     // (C) Panels — hairline-lattice wall + one Plex Mono spec caption per category.
     byRole('brand-panels').innerHTML = C.brands.groups.map((g, i) => {
       const cols = Math.min(g.items.length, 4); // wall hugs its content; sparse categories stay tight + centred
-      const spec = g.items.map(it => it.product).join(' · '); // spec-sheet line: the kit, not a repeat of the logos
       return `
       <div class="brand-panel${i === 0 ? ' is-active' : ''}" role="tabpanel" id="brand-panel-${g.key}" aria-labelledby="brand-tab-${g.key}" tabindex="-1"${i === 0 ? '' : ' hidden'}>
         <div class="brand-wall" style="--cols:${cols}">${g.items.map(brandCell).join('')}</div>
-        <p class="brand-wall-spec mono-num">${spec}</p>
       </div>`;
     }).join('');
     // (D) Verified credentials — promotes SAA accreditation + licence numbers already in content.
@@ -199,21 +188,9 @@
         <p class="process-step-body">${s.body}</p>
       </article>`).join('');
 
-    // Why Shocked
-    byRole('why-eyebrow').textContent = C.why_shocked.eyebrow;
-    setWordSpans(byRole('why-h'), C.why_shocked.h2);
-    byRole('why-body').innerHTML = C.why_shocked.body_paragraphs.map(p => `<p>${p}</p>`).join('');
-    byRole('why-stats').innerHTML = C.why_shocked.stats.map(s => `
-      <div class="stat-tile">
-        <p class="stat-value"><span class="stat-num" data-target="${s.value}">0</span><span class="suffix">${s.suffix}</span></p>
-        <p class="stat-label">${s.label}</p>
-      </div>
-    `).join('');
-
     // Service area
     byRole('area-eyebrow').textContent = C.service_area.eyebrow;
     setWordSpans(byRole('area-h'), C.service_area.h2);
-    byRole('area-lead').textContent = C.service_area.lead;
     byRole('area-clusters').innerHTML = C.service_area.clusters.map(cl => `
       <li>
         <p class="area-cluster-name">${cl.name}</p>
@@ -353,8 +330,6 @@
         stagger: { each: 0.12, from: 'start' }, delay: 0.25,
       });
     }
-    gsap.from('.hero-eyebrow', { y: 16, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.08 });
-    gsap.from('.hero-subhead', { y: 18, opacity: 0, duration: 0.9, ease: 'power3.out', delay: 0.75 });
     gsap.from('.hero-actions', { y: 18, opacity: 0, duration: 0.9, ease: 'power3.out', delay: 0.95 });
     gsap.from('.hero-suburb-band', { y: 30, opacity: 0, duration: 1.0, ease: 'power3.out', delay: 1.2 });
     gsap.from('.hero-scroll-hint', { opacity: 0, duration: 1.2, ease: 'power2.out', delay: 1.6 });
@@ -386,7 +361,17 @@
       const cards = grid.children;
       window.ScrollTrigger.create({
         trigger: grid, start: 'top 80%', once: true,
-        onEnter: () => gsap.from(cards, { y: 36, opacity: 0, duration: 0.7, ease: 'expo.out', stagger: 0.08 }),
+        onEnter: () => {
+          gsap.from(cards, {
+            y: 36, opacity: 0, duration: 0.7, ease: 'expo.out', stagger: 0.08,
+            onComplete: () => gsap.set(cards, { clearProps: 'transform,opacity' }),
+          });
+          // Fallback: a ScrollTrigger.refresh() (fonts/load/resize) can interrupt
+          // the tween mid-flight so onComplete never fires, leaving a residual
+          // transform that staggers the card tops (and misaligns the pillar ticks).
+          // Force-clear after the reveal window so every row settles flush.
+          setTimeout(() => gsap.set(cards, { clearProps: 'transform,opacity' }), 1200);
+        },
       });
     });
   }
@@ -794,6 +779,25 @@
     });
   }
 
+  /* ---------- Pillar body alignment ----------
+     Bodies are different lengths, so the dashed tick-divider would start at a
+     different height on each card. Reserve the tallest body height on all three
+     (multi-column only) so the tick lists line up across the row. */
+  function initPillarBodyAlign() {
+    const bodies = $$('.pillar-body');
+    if (bodies.length < 2) return;
+    const apply = () => {
+      bodies.forEach(b => { b.style.minHeight = ''; });
+      if (matchMedia('(max-width: 980px)').matches) return; // stacked: no alignment needed
+      const max = Math.max(...bodies.map(b => b.getBoundingClientRect().height));
+      bodies.forEach(b => { b.style.minHeight = max + 'px'; });
+    };
+    apply();
+    window.addEventListener('load', apply); // re-run once webfonts settle
+    let rt;
+    window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(apply, 200); }, { passive: true });
+  }
+
   /* ---------- Savings calculator ---------- */
   function initSavingsCalc() {
     const slider = $('#sys-size');
@@ -876,7 +880,7 @@
       if (window.ScrollTrigger) window.ScrollTrigger.refresh();
     }
     function nav(d) { open((idx + d + tiles.length) % tiles.length); }
-    $$('.work-tile').forEach(t => t.addEventListener('click', () => open(parseInt(t.dataset.idx, 10))));
+    // Lightbox click-to-open disabled — recent-work tiles are a bare gallery now. Markup/handlers stay inert.
     byRole('lightbox-close').addEventListener('click', close);
     byRole('lightbox-prev').addEventListener('click', () => nav(-1));
     byRole('lightbox-next').addEventListener('click', () => nav(1));
