@@ -33,6 +33,7 @@
     initSavingsCalc();
     initWorkGrid();
     initWorkExpand();
+    initWorkVideoTiles();
     initCountUps();
     initLeafletMap();
     initQuoteForm();
@@ -100,11 +101,13 @@
     // Recent work — bare portrait photos, no text overlay. First 4 show; the rest collapse behind "See more work".
     byRole('work-eyebrow').textContent = C.recent_work.eyebrow;
     setWordSpans(byRole('work-h'), C.recent_work.h2);
-    byRole('work-grid').innerHTML = C.recent_work.tiles.map((t, i) => `
-      <article class="work-tile${t.feature ? ' feature' : ''}${i >= 4 ? ' is-collapsed' : ''}" data-idx="${i}" data-reveal="fade-up">
-        <img src="${t.photo}" alt="${t.alt}" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async">
-      </article>
-    `).join('');
+    byRole('work-grid').innerHTML = C.recent_work.tiles.map((t, i) => {
+      const collapsed = i >= 4 ? ' is-collapsed' : '';
+      const inner = t.type === 'video'
+        ? `<video class="work-video" muted loop playsinline preload="metadata" poster="${t.poster}" aria-label="${t.alt}"><source src="${t.src}" type="video/mp4"></video><span class="work-video-badge" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>`
+        : `<img src="${t.photo}" alt="${t.alt}" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async">`;
+      return `<article class="work-tile${t.feature ? ' feature' : ''}${t.type === 'video' ? ' work-tile--video' : ''}${collapsed}" data-idx="${i}" data-reveal="fade-up">${inner}</article>`;
+    }).join('');
     byRole('work-more-label').textContent = C.recent_work.more_label;
 
     // Brands & kit — "The Wall of Kit": logo ribbon + category explorer + verified credentials
@@ -245,14 +248,6 @@
         })),
       });
     }
-
-    // CTA banner — sentence-per-line spans + italic emphasis preserved via <em>
-    byRole('cta-h').innerHTML = C.cta_banner.h2_sentences
-      .map(s => `<span class="sent sent--block"><span class="inner">${s}</span></span>`)
-      .join('');
-    byRole('cta-sub').textContent = C.cta_banner.subhead;
-    byRole('cta-primary').textContent = C.cta_banner.primary_cta;
-    byRole('cta-secondary').textContent = C.cta_banner.secondary_cta;
 
     // Footer
     byRole('footer-tag').textContent = C.footer.brand_tag;
@@ -918,6 +913,30 @@
       }
       if (window.ScrollTrigger) window.ScrollTrigger.refresh();
     });
+  }
+
+  /* ---------- Recent work — video tiles autoplay on-screen ---------- */
+  function initWorkVideoTiles() {
+    const vids = $$('.work-tile--video .work-video');
+    if (!vids.length) return;
+    // Reduced-motion / no IO support: leave posters showing, never autoplay.
+    if (reduced || !('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        const v = e.target;
+        const tile = v.closest('.work-tile');
+        if (e.isIntersecting && tile && getComputedStyle(tile).display !== 'none') {
+          const p = v.play();
+          if (p && p.catch) p.catch(() => {}); // ignore autoplay rejections
+          if (tile) tile.classList.add('is-playing');
+        } else {
+          v.pause();
+          if (tile) tile.classList.remove('is-playing');
+        }
+      });
+    }, { threshold: 0.35 });
+    // Observe every video tile (collapsed ones report no intersection until revealed + scrolled into view).
+    vids.forEach((v) => io.observe(v));
   }
 
   /* ---------- Count-ups ---------- */

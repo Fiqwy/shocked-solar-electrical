@@ -384,19 +384,6 @@ window.CONTENT = {
     ],
   },
 
-  cta_banner: {
-    // Sentences rendered as separate <span class="sent sent--block"> for one-line-per-sentence layout.
-    // Tristan removed only the opening "Why not go solar?" line; kept the rest.
-    h2_sentences: [
-      'Right kit, right install.',
-      'Powered the <em>right way</em>.',
-    ],
-    subhead: 'Get a free quote on solar, air conditioning or electrical. Brisbane and surrounds.',
-    primary_cta: 'Get a free quote',
-    secondary_cta: 'Call 0490 482 632',
-    photo: 'assets/gallery/10-DQlR5EGkyhf.jpg',
-  },
-
   footer: {
     brand_tag: 'Solar, air conditioning and electrical for South-East Queensland and Northern NSW. Powered the right way.',
     services_h: 'Services',
