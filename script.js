@@ -32,6 +32,7 @@
     initPillarBodyAlign();
     initSavingsCalc();
     initWorkGrid();
+    initWorkExpand();
     initCountUps();
     initLeafletMap();
     initQuoteForm();
@@ -96,14 +97,15 @@
       <button type="button" role="radio" aria-checked="${i === 0}" data-batt="${i === 0 ? '0' : (i === 1 ? '13.5' : '27')}">${opt}</button>
     `).join('');
 
-    // Recent work — bare portrait photos, no text overlay
+    // Recent work — bare portrait photos, no text overlay. First 4 show; the rest collapse behind "See more work".
     byRole('work-eyebrow').textContent = C.recent_work.eyebrow;
     setWordSpans(byRole('work-h'), C.recent_work.h2);
     byRole('work-grid').innerHTML = C.recent_work.tiles.map((t, i) => `
-      <article class="work-tile${t.feature ? ' feature' : ''}" data-idx="${i}" data-reveal="fade-up">
+      <article class="work-tile${t.feature ? ' feature' : ''}${i >= 4 ? ' is-collapsed' : ''}" data-idx="${i}" data-reveal="fade-up">
         <img src="${t.photo}" alt="${t.alt}" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async">
       </article>
     `).join('');
+    byRole('work-more-label').textContent = C.recent_work.more_label;
 
     // Brands & kit — "The Wall of Kit": logo ribbon + category explorer + verified credentials
     byRole('brands-eyebrow').textContent = C.brands.eyebrow;
@@ -890,6 +892,31 @@
       if (e.key === 'Escape') close();
       else if (e.key === 'ArrowLeft') nav(-1);
       else if (e.key === 'ArrowRight') nav(1);
+    });
+  }
+
+  /* ---------- Recent work — show more / less ---------- */
+  function initWorkExpand() {
+    const btn = byRole('work-more');
+    const label = byRole('work-more-label');
+    const grid = byRole('work-grid');
+    if (!btn || !label || !grid) return;
+    const extra = $$('.work-tile.is-collapsed', grid);
+    if (!extra.length) { btn.hidden = true; return; } // 4 or fewer tiles — nothing to reveal
+    btn.hidden = false;
+    let open = false;
+    btn.addEventListener('click', () => {
+      open = !open;
+      btn.setAttribute('aria-expanded', String(open));
+      label.textContent = open ? C.recent_work.less_label : C.recent_work.more_label;
+      extra.forEach(t => t.classList.toggle('is-collapsed', !open));
+      if (open && !reduced && window.gsap) {
+        window.gsap.from(extra, {
+          y: 24, opacity: 0, duration: 0.5, ease: 'expo.out', stagger: 0.06,
+          onComplete: () => window.gsap.set(extra, { clearProps: 'transform,opacity' }),
+        });
+      }
+      if (window.ScrollTrigger) window.ScrollTrigger.refresh();
     });
   }
 
