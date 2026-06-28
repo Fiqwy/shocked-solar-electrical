@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fiqwy.github.io/shocked-solar-electrical/sitemap.xml
+Sitemap: https://shockedsolarandelectrical.com/sitemap.xml
