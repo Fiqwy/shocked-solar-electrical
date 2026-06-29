@@ -33,9 +33,30 @@
   "voice_read": {
     "team_structure": "TEAM (not solo) - captions use 'the team', 'the boys'",
     "tone": "confident, practical, technical, Aussie casual",
-    "signature_phrases": ["Why not go solar?", "the boys", "Powered Right", "#SSE", "#ShockedSolarElectrical"],
-    "emoji_palette": ["⚡", "☀️", "🔋", "❄️", "💡", "📍", "📞", "📧"],
-    "hashtag_style": ["#SolarQueensland", "#ShockedSolarElectrical", "#SSE", "#SolarPower", "#GoSolar"]
+    "signature_phrases": [
+      "Why not go solar?",
+      "the boys",
+      "Powered Right",
+      "#SSE",
+      "#ShockedSolarElectrical"
+    ],
+    "emoji_palette": [
+      "⚡",
+      "☀️",
+      "🔋",
+      "❄️",
+      "💡",
+      "📍",
+      "📞",
+      "📧"
+    ],
+    "hashtag_style": [
+      "#SolarQueensland",
+      "#ShockedSolarElectrical",
+      "#SSE",
+      "#SolarPower",
+      "#GoSolar"
+    ]
   },
   "service_capabilities": {
     "solar": {
@@ -43,7 +64,15 @@
       "commercial": true,
       "largest_install_kw": 100,
       "battery_storage_largest_kwh": 96,
-      "brands_installed": ["SolaX", "GoodWe", "LONGi Hi-MO X10", "Jinko", "TCL", "Schletter (racking)", "Sigenergy"],
+      "brands_installed": [
+        "SolaX",
+        "GoodWe",
+        "LONGi Hi-MO X10",
+        "Jinko",
+        "TCL",
+        "Schletter (racking)",
+        "Sigenergy"
+      ],
       "warranty": "10 Year Installation Warranty"
     },
     "air_conditioning": {
@@ -56,7 +85,11 @@
       "patio_fitouts": true,
       "switchboards_inferred": true
     },
-    "service_areas_mentioned": ["Brisbane", "Mount Gravatt", "North Queensland (remote properties)"]
+    "service_areas_mentioned": [
+      "Brisbane",
+      "Mount Gravatt",
+      "North Queensland (remote properties)"
+    ]
   },
   "highlights": [
     {
@@ -90,7 +123,10 @@
       "local": "assets/gallery/02-DYwL2LtqA1l-reel.jpg",
       "category": "case-study-commercial",
       "highlight": "21kW Mount Gravatt commercial install",
-      "tech": ["GoodWe 20kW 3-Phase Inverter", "TCL 440W High Efficiency Panels"],
+      "tech": [
+        "GoodWe 20kW 3-Phase Inverter",
+        "TCL 440W High Efficiency Panels"
+      ],
       "caption": "Another quality commercial install completed by Shocked Solar & Electrical ⚡ We recently finished this 21kW solar installation in Mount Gravatt ☀️. 🔹 GoodWe 20kW 3-Phase Inverter. 🔹 TCL 440W High Efficiency Panels. Helping local businesses cut power bills and take control of rising energy costs 💰⚡ Thinking about solar for your home or business? Get in touch with the team at Shocked Solar & Electrical! 📞 0490 482 632 📩 SHOCKEDSOLARELECTRICAL@GMAIL.COM #ShockedSolarElectrical #CommercialSolar #MountGravatt #SolarQLD"
     },
     {
@@ -101,7 +137,12 @@
       "local": "assets/gallery/03-DYwKM2hGsQd.jpg",
       "category": "case-study-residential",
       "highlight": "Full battery + backup install",
-      "tech": ["50kWh SolaX battery storage", "10kW SolaX inverter", "13.3kW LONGi Hi-MO X10 panels", "Whole home backup"],
+      "tech": [
+        "50kWh SolaX battery storage",
+        "10kW SolaX inverter",
+        "13.3kW LONGi Hi-MO X10 panels",
+        "Whole home backup"
+      ],
       "caption": "Another premium install completed by Shocked Solar & Electrical 🔋☀️ This customer is now powered with: 🔹 50kWh SolaX battery storage 🔹 10kW SolaX inverter 🔹 13.3kW of LONGi Hi-MO X10 solar panels 🔹 Whole home backup – keeping the lights on when the grid goes down! ⚡️🏡 Less reliance on the grid, more energy independence, and serious savings for years to come 🙌"
     },
     {
@@ -169,7 +210,12 @@
       "local": "assets/gallery/10-DQlR5EGkyhf.jpg",
       "category": "case-study-commercial",
       "highlight": "100kW remote NQ install — flagship job",
-      "tech": ["Jinko panels", "Schletter racking", "Sigenergy inverters", "96kW battery storage"],
+      "tech": [
+        "Jinko panels",
+        "Schletter racking",
+        "Sigenergy inverters",
+        "96kW battery storage"
+      ],
       "caption": "☀️ The boys are headed up to North Queensland! Tackling a massive 100 kW solar install on a remote property — powered by Jinko panels, Schletter racking, Sigenergy inverters, and 96 kW of battery storage ⚡️🌴. Remote location, big energy — nothing we can't handle 💪 #SolarPower #NorthQueensland #RenewableEnergy #OffGrid #sse"
     },
     {
@@ -182,5 +228,267 @@
       "highlight": "AC relocation + patio electrical fitout (Alan's job)",
       "caption": "The boys had their work cut out at Alan's! It was necessary we relocated 2 split system air conditioners to make room for a monster fly over patio 🧐. Once built we roughed in and fit off the sandwich insulated patio, entertainment area and future kitchenette… This project turned out a treat 🤩. If you're looking to do something similar, get in contact with us…"
     }
-  ]
+  ],
+  "gallery_harvest_2026_06_29": {
+    "harvested_at": "2026-06-29",
+    "by": "gallery-dl (logged-in via owner IG session) + ffmpeg",
+    "source": "https://www.instagram.com/shockedsolarandelectrical/",
+    "note": "Full-res harvest of all 12 work posts (carousels traversed). Excluded 2 ad posts (DZHSiGvKDSv infographic, DX6gXyFCd6h kitchen-reno) + 1 in-carousel promo graphic (DYtoSH4Gue- slide 2, SolaX contact card). Photos->webp<=1080px; videos VP9/H264->H.264<=800px +faststart +poster; reel DYwL2LtqA1l reuses hero commercial-install.mp4. First 4 = showcase.",
+    "count": {
+      "photos": 21,
+      "videos": 9,
+      "total": 30
+    },
+    "items": [
+      {
+        "n": 1,
+        "type": "video",
+        "post_shortcode": "DYwL2LtqA1l",
+        "file": "assets/video/commercial-install.mp4",
+        "alt": "Black solar panel array on a commercial rooftop overlooking a main road",
+        "showcase": true,
+        "poster": "assets/video/commercial-install-poster.jpg"
+      },
+      {
+        "n": 2,
+        "type": "photo",
+        "post_shortcode": "DQlR5EGkyhf",
+        "file": "assets/gallery/DQlR5EGkyhf-01.webp",
+        "alt": "Rows of solar panels installed on a metal roof with bushland in the background",
+        "showcase": true
+      },
+      {
+        "n": 3,
+        "type": "video",
+        "post_shortcode": "DZt3VGxD5OZ",
+        "file": "assets/gallery/DZt3VGxD5OZ-01.mp4",
+        "alt": "Black solar panels installed on a dark corrugated metal roof under a blue sky",
+        "showcase": true,
+        "poster": "assets/gallery/DZt3VGxD5OZ-01-poster.jpg"
+      },
+      {
+        "n": 4,
+        "type": "photo",
+        "post_shortcode": "DYwKM2hGsQd",
+        "file": "assets/gallery/DYwKM2hGsQd-01.webp",
+        "alt": "SolaX hybrid inverter and two stacked SolaX Triple Power battery modules installed against a rendered wall",
+        "showcase": true
+      },
+      {
+        "n": 5,
+        "type": "photo",
+        "post_shortcode": "DSB_REmk-G3",
+        "file": "assets/gallery/DSB_REmk-G3-01.webp",
+        "alt": "Electrician commissioning a wall-mounted SolaX hybrid inverter beside the switchboard",
+        "showcase": false
+      },
+      {
+        "n": 6,
+        "type": "video",
+        "post_shortcode": "DX6bbvVCXqV",
+        "file": "assets/gallery/DX6bbvVCXqV-03.mp4",
+        "alt": "Solar panels installed across the flat metal roof of a commercial shed",
+        "showcase": false,
+        "poster": "assets/gallery/DX6bbvVCXqV-03-poster.jpg"
+      },
+      {
+        "n": 7,
+        "type": "photo",
+        "post_shortcode": "DZHR6dMGqej",
+        "file": "assets/gallery/DZHR6dMGqej-02.webp",
+        "alt": "Wall-mounted SolaX solar inverter with DC isolators and cabling",
+        "showcase": false
+      },
+      {
+        "n": 8,
+        "type": "photo",
+        "post_shortcode": "DZJ5qM5mtr2",
+        "file": "assets/gallery/DZJ5qM5mtr2-01.webp",
+        "alt": "Rooftop solar array on a white corrugated metal roof overlooking a housing development",
+        "showcase": false
+      },
+      {
+        "n": 9,
+        "type": "video",
+        "post_shortcode": "DNK4dt9TITb",
+        "file": "assets/gallery/DNK4dt9TITb-02.mp4",
+        "alt": "Covered outdoor patio at night with black ceiling fans and downlights over an alfresco area",
+        "showcase": false,
+        "poster": "assets/gallery/DNK4dt9TITb-02-poster.jpg"
+      },
+      {
+        "n": 10,
+        "type": "photo",
+        "post_shortcode": "DRMJ2XoE2vw",
+        "file": "assets/gallery/DRMJ2XoE2vw-01.webp",
+        "alt": "Installer in a branded shirt fixing solar panels on a corrugated metal roof",
+        "showcase": false
+      },
+      {
+        "n": 11,
+        "type": "photo",
+        "post_shortcode": "DX88FHQCcfk",
+        "file": "assets/gallery/DX88FHQCcfk-02.webp",
+        "alt": "Sungrow solar inverter and PV isolator mounted on a brick wall",
+        "showcase": false
+      },
+      {
+        "n": 12,
+        "type": "video",
+        "post_shortcode": "DYtoSH4Gue-",
+        "file": "assets/gallery/DYtoSH4Gue--01.mp4",
+        "alt": "Rows of solar panels mounted on a residential roof, house and garden behind",
+        "showcase": false,
+        "poster": "assets/gallery/DYtoSH4Gue--01-poster.jpg"
+      },
+      {
+        "n": 13,
+        "type": "photo",
+        "post_shortcode": "DQlR5EGkyhf",
+        "file": "assets/gallery/DQlR5EGkyhf-03.webp",
+        "alt": "All-black solar panels installed across a flat metal roof, catching low sunlight",
+        "showcase": false
+      },
+      {
+        "n": 14,
+        "type": "video",
+        "post_shortcode": "DZt3VGxD5OZ",
+        "file": "assets/gallery/DZt3VGxD5OZ-02.mp4",
+        "alt": "Rooftop solar array at a commercial building site with scaffolding alongside",
+        "showcase": false,
+        "poster": "assets/gallery/DZt3VGxD5OZ-02-poster.jpg"
+      },
+      {
+        "n": 15,
+        "type": "photo",
+        "post_shortcode": "DRMJ2XoE2vw",
+        "file": "assets/gallery/DRMJ2XoE2vw-02.webp",
+        "alt": "Array of solar panels mounted on rails across a corrugated metal roof",
+        "showcase": false
+      },
+      {
+        "n": 16,
+        "type": "photo",
+        "post_shortcode": "DX6bbvVCXqV",
+        "file": "assets/gallery/DX6bbvVCXqV-01.webp",
+        "alt": "Large solar panel array mounted on a grey corrugated metal roof",
+        "showcase": false
+      },
+      {
+        "n": 17,
+        "type": "video",
+        "post_shortcode": "DQlR5EGkyhf",
+        "file": "assets/gallery/DQlR5EGkyhf-02.mp4",
+        "alt": "Switchboard interior showing neatly run cabling along cable tray and distribution panels",
+        "showcase": false,
+        "poster": "assets/gallery/DQlR5EGkyhf-02-poster.jpg"
+      },
+      {
+        "n": 18,
+        "type": "photo",
+        "post_shortcode": "DZJ5qM5mtr2",
+        "file": "assets/gallery/DZJ5qM5mtr2-02.webp",
+        "alt": "Solar panels mounted on a metal roof, with a residential estate under construction behind",
+        "showcase": false
+      },
+      {
+        "n": 19,
+        "type": "photo",
+        "post_shortcode": "DZHR6dMGqej",
+        "file": "assets/gallery/DZHR6dMGqej-01.webp",
+        "alt": "Black solar panels installed on a grey corrugated metal roof at a building site",
+        "showcase": false
+      },
+      {
+        "n": 20,
+        "type": "video",
+        "post_shortcode": "DZt3VGxD5OZ",
+        "file": "assets/gallery/DZt3VGxD5OZ-06.mp4",
+        "alt": "Solar panels on a residential roof overlooking a street with two work vans in the driveway",
+        "showcase": false,
+        "poster": "assets/gallery/DZt3VGxD5OZ-06-poster.jpg"
+      },
+      {
+        "n": 21,
+        "type": "photo",
+        "post_shortcode": "DSB_REmk-G3",
+        "file": "assets/gallery/DSB_REmk-G3-02.webp",
+        "alt": "Black solar panel array installed on a white corrugated metal roof under a blue sky",
+        "showcase": false
+      },
+      {
+        "n": 22,
+        "type": "photo",
+        "post_shortcode": "DX88FHQCcfk",
+        "file": "assets/gallery/DX88FHQCcfk-01.webp",
+        "alt": "Solar panel array on a corrugated metal roof with bushland behind",
+        "showcase": false
+      },
+      {
+        "n": 23,
+        "type": "photo",
+        "post_shortcode": "DZJ5qM5mtr2",
+        "file": "assets/gallery/DZJ5qM5mtr2-03.webp",
+        "alt": "Black solar panels on a metal roof in afternoon light, with houses and trees in the distance",
+        "showcase": false
+      },
+      {
+        "n": 24,
+        "type": "photo",
+        "post_shortcode": "DZt3VGxD5OZ",
+        "file": "assets/gallery/DZt3VGxD5OZ-03.webp",
+        "alt": "Solar panels on a white corrugated roof with a mountain and rural houses in the background",
+        "showcase": false
+      },
+      {
+        "n": 25,
+        "type": "video",
+        "post_shortcode": "DX6bbvVCXqV",
+        "file": "assets/gallery/DX6bbvVCXqV-02.mp4",
+        "alt": "Aluminium solar mounting rails fixed in rows along a corrugated metal roof, ready for panels",
+        "showcase": false,
+        "poster": "assets/gallery/DX6bbvVCXqV-02-poster.jpg"
+      },
+      {
+        "n": 26,
+        "type": "photo",
+        "post_shortcode": "DYwKM2hGsQd",
+        "file": "assets/gallery/DYwKM2hGsQd-02.webp",
+        "alt": "Solar panel arrays across multiple sections of a white corrugated metal roof",
+        "showcase": false
+      },
+      {
+        "n": 27,
+        "type": "photo",
+        "post_shortcode": "DZt3VGxD5OZ",
+        "file": "assets/gallery/DZt3VGxD5OZ-04.webp",
+        "alt": "Two rows of solar panels installed on a grey tiled roof",
+        "showcase": false
+      },
+      {
+        "n": 28,
+        "type": "photo",
+        "post_shortcode": "DZt3VGxD5OZ",
+        "file": "assets/gallery/DZt3VGxD5OZ-05.webp",
+        "alt": "Black-framed solar panels on a white corrugated metal roof, rural property behind",
+        "showcase": false
+      },
+      {
+        "n": 29,
+        "type": "photo",
+        "post_shortcode": "DNK4dt9TITb",
+        "file": "assets/gallery/DNK4dt9TITb-01.webp",
+        "alt": "Before and after of an enclosed patio fit-out, with recessed downlights and black ceiling fans installed under the new roof",
+        "showcase": false
+      },
+      {
+        "n": 30,
+        "type": "photo",
+        "post_shortcode": "DNK4dt9TITb",
+        "file": "assets/gallery/DNK4dt9TITb-03.webp",
+        "alt": "Before and after of a Mitsubishi split-system air conditioner installed on a brick wall, with an electrician on a ladder beside the indoor unit",
+        "showcase": false
+      }
+    ]
+  }
 }
