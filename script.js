@@ -1159,7 +1159,7 @@
       // placeholder OR the fetch fails, fall back to a mailto: so the lead
       // STILL reaches the team, with phone number prominent in the success
       // copy. No silent lead loss.
-      const WEB3FORMS_KEY = 'REPLACE_WITH_REAL_WEB3FORMS_ACCESS_KEY';
+      const WEB3FORMS_KEY = '585fcb70-7a92-4b9f-9d3b-0b964289090c';
       const FALLBACK_EMAIL = 'shockedsolarelectrical@gmail.com';
 
       const interestsList = data.interests.length ? data.interests.join(', ') : 'Not specified';
@@ -1276,7 +1276,7 @@
         return;
       }
       btn.disabled = true;
-      const WEB3FORMS_KEY = 'REPLACE_WITH_REAL_WEB3FORMS_ACCESS_KEY';
+      const WEB3FORMS_KEY = '585fcb70-7a92-4b9f-9d3b-0b964289090c';
       const FALLBACK_EMAIL = 'shockedsolarelectrical@gmail.com';
       let delivered = false;
       try {
