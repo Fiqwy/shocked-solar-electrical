@@ -1134,6 +1134,10 @@ body {
 @keyframes spin { to { transform: rotate(360deg); } }
 .quote-success { text-align: center; padding: 36px 8px; animation: fadeUp 400ms var(--ease-out) both; }
 .quote-success-tick { width: 64px; height: 64px; border-radius: 50%; background: rgba(107, 207, 127, 0.15); color: var(--success); display: grid; place-items: center; margin: 0 auto 20px; }
+/* ⚠️ The author `display: grid` above beats the UA [hidden] rule, so the green tick
+   has to be told explicitly. Without this it stays on screen over the "we could not
+   send that" card, which is the contradiction this whole fix exists to remove. */
+.quote-success-tick[hidden] { display: none; }
 .quote-success h3 { font-family: 'IBM Plex Sans', system-ui, sans-serif; font-weight: 800; font-size: 2rem; margin: 0 0 12px; letter-spacing: -0.025em; color: var(--cream); }
 .quote-success p { color: var(--cream-muted); margin: 0 0 24px; }
 

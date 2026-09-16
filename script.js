@@ -1182,15 +1182,29 @@
           fd.append('replyto', data.email);
           Object.entries(data).forEach(([k, v]) => fd.append(k, Array.isArray(v) ? v.join(', ') : v));
           const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
-          delivered = res.ok;
+          // ⚠️ res.ok IS NOT ENOUGH. Web3Forms answers 200 with {"success": false}
+          // when the key is wrong, the quota is spent or the message is judged spam.
+          // Trusting the status alone showed "Got it." over a lead that was refused.
+          const out = await res.json().catch(() => null);
+          delivered = res.ok && !!(out && out.success === true);
         }
       } catch (_) { delivered = false; }
 
       // Build the success/fallback card. ALWAYS show a working contact path.
       const successBody = byRole('quote-success-body');
+      const successHead = byRole('quote-success-h');
+      const successTick = document.querySelector('.quote-success-tick');
       if (delivered) {
+        if (successHead) successHead.textContent = C.quote.success_h;
+        if (successTick) successTick.hidden = false;
         if (successBody) successBody.textContent = C.quote.success_body;
       } else {
+        // ⚠️ The heading and the green tick used to survive into this branch, so the
+        // card read "Got it." with a tick above a sentence saying we could not send
+        // it. Whatever else is true, do not congratulate someone on a lead that
+        // did not go.
+        if (successHead) successHead.textContent = 'Almost there.';
+        if (successTick) successTick.hidden = true;
         // Form not yet wired (or send failed). Surface phone + a mailto deeplink.
         const mailto = `mailto:${FALLBACK_EMAIL}?subject=${encodeURIComponent('Quote request — ' + data.name)}&body=${encodeURIComponent(mailtoBody)}`;
         if (successBody) {
@@ -1287,7 +1301,9 @@
           fd.append('from_name', 'Shocked Solar Website');
           fd.append('name', name); fd.append('phone', phone); fd.append('service', service);
           const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
-          delivered = res.ok;
+          // Same as the quote form: a 200 can still carry {"success": false}.
+          const out = await res.json().catch(() => null);
+          delivered = res.ok && !!(out && out.success === true);
         }
       } catch (_) { delivered = false; }
       if (delivered) {
